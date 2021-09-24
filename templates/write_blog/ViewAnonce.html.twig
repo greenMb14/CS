@@ -34,8 +34,16 @@
  
             {% for value in data %}
                 <tr>
-                <th scope="row">{{value.titre}}</th>
-                <td scope="row"><img src="/image/{{value.fichier}}" style="width:130px;height:10px;border-radius:10px"></td>
+                <th scope="row">{{value.title}}</th>
+                <td scope="row">
+                {% if "mp4" in value.file %}
+                  <video src="/image/{{value.file}}"  style="width:130px;height:100px;border-radius:10px" controls></video>
+                  {% else %}
+                     <img src="/image/{{value.file}}" style="width:130px;height:100px;border-radius:10px">
+                  {% endif %}
+                
+               
+                </td>
                 <td scope="row">
                    <a  href="{{path('Updateblog',{'id':value.id})}}">
                       <button class="btn btn-warning text-white" id="voirAnnonce" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
