@@ -1,0 +1,115 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Administrator{% endblock %}
+
+{% block body %}
+ 
+  
+ 
+    <!-- ======= Contact Section ======= -->
+               
+ 
+
+  {# <section id="main-content"> #}
+      {# <section class="wrapper"> #}
+
+           <div class="row mt">
+          <div class="col-lg-12">
+            
+
+           <div class="form-panel">
+              {{form_start(form,{'attr':{'class':'form-horizontal style-form'}})}}
+                <div class="form-group has-success">
+                   <label class="col-lg-2 control-label">Votre Titre Principal</label>
+                  <div class="col-lg-10">
+                     {{form_widget(form.titre,{'attr':{'class':'form-control','placeholder':'Saissire votre titre'}})}}
+        
+                  </div>
+                </div>
+                <div class="form-group has-warning">
+                     <label class="col-lg-2 control-label">Resumer votre annonce</label>
+                  <div class="col-lg-10">
+                    {{form_widget(form.content,{'attr':{'class':'form-control','placeholder':'Saissire Votre Annonce'}},{'type': 'textarea'})}}
+
+                  </div>
+                </div>
+                <div class="form-group has-success">
+                   <label class="col-lg-2 control-label">sous-titre 1 </label>
+                  <div class="col-lg-10">
+                     {{form_widget(form.premiertitre,{'attr':{'class':'form-control','placeholder':'Saissire votre premier sous-titre'}})}}
+        
+                  </div>
+                </div>
+                <div class="form-group has-warning">
+                     <label class="col-lg-2 control-label"> sous-annonce 1</label>
+                  <div class="col-lg-10">
+                    {{form_widget(form.contentA,{'attr':{'class':'form-control','placeholder':'Saissire Votre Annonce'}},{'type': 'textarea'})}}
+
+                  </div>
+                </div>
+
+
+                <div class="form-group has-success">
+                   <label class="col-lg-2 control-label">sous-titre 2</label>
+                  <div class="col-lg-10">
+                     {{form_widget(form.deuxiemetitre,{'attr':{'class':'form-control','placeholder':'Saissire votre deuxieme sous-titre'}})}}
+        
+                  </div>
+                </div>
+                <div class="form-group has-warning">
+                     <label class="col-lg-2 control-label">sous-annonce 2</label>
+                  <div class="col-lg-10">
+                    {{form_widget(form.contentB,{'attr':{'class':'form-control','placeholder':'Saissire Votre Annonce'}},{'type': 'textarea'})}}
+
+                  </div>
+                </div>
+
+
+                <div class="form-group has-error">
+                 <label class="col-lg-2 control-label">Votre fichier join image ou video</label>
+                  <div class="col-lg-10"  id="file">
+                     veuillez etre sur de votre fichier dont vous voulez poster,car il ne sera plus modifiable
+                     {{form_widget(form.fichier,{'attr':{'class':'form-control','style':'border:none;'}})}}
+                
+                  </div>
+                </div>
+                
+
+                <div class="form-group">
+
+                    <div id="message">
+                      Confirmez-vous ces informations? si oui recliquer 
+                      <span id='accepter'>Oui</span>
+                      <span id='refuser'>Non</span>
+                    </div>
+
+                  <div class="col-lg-offset-2 col-lg-10">
+                    {{form_widget(form.submit)}}
+                  </div>
+
+
+                   <div class="col-lg-offset-2 col-lg-10">
+                   <input style='margin:auto' class="btn btn-success" type="button" value="Valider Votre Annonce" id="verification">
+                  </div>
+                </div>
+               {{form_end(form)}}
+           
+            
+             
+           </div>
+           </div>   
+        </section>
+          </section>  
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  
+    
+    <!-- End Contact Section -->
+ <script src="/mju/lib/js/Annonce.js">
+ 
+</script> 
+{% endblock %}

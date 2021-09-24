@@ -1,0 +1,84 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Administrator{% endblock %}
+
+{% block body %}
+ 
+  
+ 
+    <!-- ======= Contact Section ======= -->
+    
+
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="row justify-content-center" data-aos="fade-up">
+
+          <div class="col-lg-10">
+
+            <div class="info-wrap">
+              <div class="row">
+
+                <div class="col-lg-4 info mt-4 mt-lg-0">
+                <a href="{{path('VoirAnnonce')}}" >
+                     <button class="btn btn-success" id="voirAnnonce">Voir vos Annonces</button> 
+                </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+
+        
+          
+          
+         
+          
+      
+
+        <div class="row mt-5 justify-content-center" data-aos="fade-up">
+
+         {% for element in image %}
+              <div class="col-lg-10">
+                   <img src="/Blog/{{element.fichier}}">
+              </div>
+           {% endfor %}
+           
+          <div class="col-lg-10">
+      
+            
+            {{form_start(form,{'attr':{'class':'php-email-form'}})}}
+               <div class="form-group mt-3">
+                 {{form_widget(form.titre,{'attr':{'class':'form-control','placeholder':'Saissire votre titre'}})}}
+              </div>
+             
+
+              <div class="form-group mt-3">
+                 {{form_widget(form.content,{'attr':{'class':'form-control','placeholder':'Saissire Votre Annonce'}},{'type': 'textarea'})}}
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+                <div class="text-center">
+                 {{form_widget(form.submit)}}
+              </div>
+              {{form_end(form)}}
+         
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <script src="/mju/lib/js/Annonce.js">
+    <!-- End Contact Section -->
+  
+{% endblock %}

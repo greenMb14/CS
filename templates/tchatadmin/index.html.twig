@@ -1,0 +1,37 @@
+{% extends 'baseadmin.html.twig' %}
+ 
+{% block body %}
+<link href="/mju/css/tchat.css" rel="stylesheet">
+  <section id="main-content">
+      <section class="wrapper">
+ <div id="profilmargin"></div>
+    
+ <div id="profil">
+  
+ </div>        
+   
+<article id="articletchat">
+  
+ 
+       
+   
+    
+ 
+</article>
+<form action="">
+      <input type="hidden"  id="path" value="{{path('sendMessagePersonnel')}}">
+      <input type="hidden"  id="pathnotification" value="{{path('recherchernotification')}}">
+      <input type='hidden' id='pathloadmessage' value='{{path('loadmessagePersonnel')}}'>
+       <input type='hidden' id='pathloadNewmessage' value='{{path('loadNewmessagePersonnel')}}'>
+      <textarea required  id="message">envoyer votre message ici</textarea><br>
+      <input type="submit" value="SEND" id="envoyer">
+</form>
+</section>
+</section>
+
+ <script>
+    document.getElementById("articletchat").scrollTop = document.getElementById("articletchat").scrollHeight;
+ </script>
+ <script src="/js/ajax.js"></script>
+ 
+{% endblock %}

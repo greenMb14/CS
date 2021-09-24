@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+ <link href="/assets/css/chat.css" rel="stylesheet">
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Contact</h2>
+          <ol>
+            <li><a href="{{path('user')}}">Home</a></li>
+            <li><a href="{{path('test')}}">Home</a></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <div class="map-section">
+      <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/place/CS+communications/@4.0239746,9.7149071,15z/data=!4m5!3m4!1s0x0:0xd367c56e6cb3dd1c!8m2!3d4.0239746!4d9.7149071" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="row justify-content-center" data-aos="fade-up">
+
+          <div class="col-lg-10">
+
+            <div class="info-wrap">
+              <div class="row">
+                <div class="col-lg-4 info">
+                  <i class="bi bi-geo-alt"></i>
+                  <h4>Location:</h4>
+                  <p>KM5 <br> Douala/terminus</p>
+                </div>
+
+                <div class="col-lg-4 info mt-4 mt-lg-0">
+                  <i class="bi bi-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>contact@cscommunications.net</p>
+                </div>
+
+                <div class="col-lg-4 info mt-4 mt-lg-0">
+                  <i class="bi bi-phone"></i>
+                  <h4>Call:</h4>
+                  <p>+237 694 13 15 98 <br>+237 652 52 20 20</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        
+      </div>
+    </section>
+    
+  
+     <div id="profil">
+         <input type="email" class="form-control"  id="email" required placeholder ="veuillez entre votre adresse email">
+     </div>       
+   
+<article id="articletchat">
+  
+     
+    
+ 
+</article>
+<form action="">
+      <textarea required  id="message">envoyer votre message ici</textarea><br>
+       <input type="hidden" value="{{path('sendmessage')}}" id="pathenvois">
+       <input type="hidden" value="{{path('getmessageinternaute')}}" id="pathrecois">
+      <input type="submit" value="SEND" id="envoyer">
+</form>
+ <script>
+    document.getElementById("articletchat").scrollTop = document.getElementById("articletchat").scrollHeight;
+
+    function afficheHeure(){
+      setInterval(function(){
+            
+      }, 1000)
+}
+
+    }
+ </script>
+ 
+
+<script src="/assets/js/javascript.js"></script>
+
+    
+    <!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+
+
+
+
+{% endblock %}

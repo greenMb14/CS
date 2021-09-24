@@ -1,0 +1,47 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Administrator{% endblock %}
+
+{% block body %}
+
+
+ <div class="row mt-5 justify-content-center" data-aos="fade-up">
+          <div class="col-lg-10">
+
+
+  
+           <table class="table table-dark table-striped">
+             <thead class="thead-primary">
+                <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Fichier</th>
+                {# <th scope="col">Modifier</th>
+                <th scope="col">Supprimer</th> #}
+                </tr>
+            </thead>
+            <tbody>
+ 
+            {% for value in data %}
+                <tr>
+                <th scope="row">{{value.titre}}</th>
+                <td scope="row"><img src="/image/{{value.fichier}}" style="width:130px;height:10px;border-radius:10px"></td>
+                <td scope="row">
+                   <a  href="{{path('Updateblog',{'id':value.id})}}">
+                      <button class="btn btn-warning text-white" id="voirAnnonce" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                   </a>
+               
+                   <a  href="{{path('Deleteblog',{'id':value.id})}}">
+                       <button class="btn btn-danger" id="oirAnnonce" ><i class="fa fa-trash-o" ></i></button>
+                   </a>
+                </td>
+                </tr>
+ 
+            {% endfor %}
+                
+          </tbody>
+        </table>
+        </div>
+        </div>
+       
+ 
+ {% endblock %}

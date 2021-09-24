@@ -1,0 +1,59 @@
+ {% for item in data %}
+ 
+ {% if item.idUser == 0 and item.email == email %}
+       
+   
+          <div id="tchatcontent">
+                     <div id="tchatinfo">
+                          <div id="tchatname">
+                               <i>{{item.email}}</i>
+                               
+                          </div>
+                          <div id="tchatheur">
+                                  <i>15:40:01</i> 
+                          </div>
+                       </div>
+                <div id="sms2">
+               {{item.message}}
+              <i id="{{item.id}}"></i>
+                </div>
+         </div>
+          <br>
+<input type="hidden" value="{{item.email}}"> 
+
+ {% endif %}
+
+  {% if item.iduser != 0 and item.email == email %}
+      
+       <div id="tchatcontentUser">
+                     <div id="tchatinfo">
+                          <div id="tchatname">
+                          <i>CS COMMUNICATION</i>
+                          </div>
+                          <div id="tchatheur">
+                                  <i>15:40:01</i>
+                          </div>
+                       </div>
+
+              <div class="carousel-container" style="width:100%;">
+            
+              <p id="sms">{{item.message}}</p>
+              
+              <i id="{{item.id}}"></i>
+          
+                     
+               
+              
+                </div>
+         </div>
+          <br>
+
+ {% endif %}
+ 
+ 
+ {% endfor %}
+ 
+  <script>
+    document.getElementById("articletchat").scrollTop = document.getElementById("articletchat").scrollHeight;
+ </script>
+ 

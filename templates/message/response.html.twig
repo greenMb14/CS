@@ -1,0 +1,30 @@
+
+
+
+ 
+  {% for valeur in message %}
+    
+       <div id="tchatcontentUser">
+                     <div id="tchatinfo">
+                          <div id="tchatname">
+                          <i>{{valeur.email}}</i>
+                          </div>
+                          <div id="tchatheur">
+                                  <i>15:40:01</i>
+                          </div>
+                       </div>
+               
+
+
+              <div class="carousel-container" style="width:100%;">
+            
+              <p id="sms">{{valeur.message}}</p>
+              
+              <i id="{{valeur.id}}"></i>
+                    
+              
+                </div>
+         </div>
+          <br> 
+  {% endfor %}     
+      

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+<section class="vh-100" style="background-color: #fff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100" >
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5"  >
+        <div class="card shadow-2-strong" style="border-radius: 1rem;" >
+          <div class="card-body p-5 text-center" style="box-shadow:0 0 2rem grey;border-radius:15px;">
+
+            <h3 class="mb-5">Sign in</h3>
+        <form>
+            <div class="form-outline mb-4">
+               <label for="inputUsername">Username</label>
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+            </div>
+
+            <div class="form-outline mb-4">
+               <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                    <input type="hidden" name="_csrf_token"
+                     value="{{ csrf_token('authenticate') }}"
+                > 
+
+            </div>
+                    {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+                #}
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+        </form>
+             <div>
+              <p class="mb-0">Don't have an account? </p>
+              <a href="{{path('inscrit')}}" class="">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+   
+{% endblock %}
