@@ -143,15 +143,17 @@ $(()=>{
          if (/[A-Z]/.test(secondTitle)){
             $('#annonce_secondTitle').css('border-color','#36b9cc');
             $('#secondTitle').html('');
-        
+     
          }else if(secondTitle.length < 8){
             $('#annonce_secondTitle').css('border-color','red');
             $('#secondTitle').html('votre champs doit contenir au moins 8 caracteres');
             $('#secondTitle').css('color','red');
+       
          }else{
             $('#annonce_secondTitle').css('border-color','red');
             $('#secondTitle').html('votre titre doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#secondTitle').css('color','red');
+     
          }
     })
 
@@ -166,15 +168,17 @@ $(()=>{
          if (/[a-zA-Z0-9]/.test(ContentB)){
             $('#annonce_ContentB').css('border-color','#36b9cc');
             $('#ContentB').html('');
-  
+       
          }else if(ContentB.length < 100){
             $('#annonce_ContentB').css('border-color','red');
             $('#ContentB').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentB').css('color','red');
+ 
          }else{
             $('#annonce_ContentB').css('border-color','red');
             $('#ContentB').html('votre Contenu ne doit pas comprendre de caracteres speciaux');
             $('#ContentB').css('color','red');
+  
          }
     })
 
@@ -192,15 +196,17 @@ $(()=>{
          if (/[A-Z]/.test(thirtTitle)){
             $('#annonce_thirtTitle').css('border-color','#36b9cc');
             $('#thirtTitle').html('');
-         
+  
          }else if(thirtTitle.length < 8){
             $('#annonce_thirtTitle').css('border-color','red');
             $('#thirtTitle').html('votre champs doit contenir au moins 8 caracteres');
             $('#thirtTitle').css('color','red');
+         
          }else{
             $('#annonce_thirtTitle').css('border-color','red');
             $('#thirtTitle').html('votre titre doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#thirtTitle').css('color','red');
+        
          }
     })
 
@@ -213,15 +219,17 @@ $(()=>{
          if (/[a-zA-Z0-9]/.test(ContentC)){
             $('#annonce_ContentC').css('border-color','#36b9cc');
             $('#ContentC').html('');
-     
+             
          }else if(ContentC.length < 100){
             $('#annonce_ContentC').css('border-color','red');
             $('#ContentC').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentC').css('color','red');
+       
          }else{
             $('#annonce_ContentC').css('border-color','red');
             $('#ContentC').html('votre Contenu ne doit pas comprendre de caracteres speciaux');
             $('#ContentC').css('color','red');
+        
          }
     })
 
@@ -230,21 +238,17 @@ $(()=>{
     // acceptation de la soumission du formulaire d'annomce
 
  setInterval(() => {
-
-        if (
-             verifTitle == true && verifcategory == true && 
-             verifResumer == true && verifFirstTitle == true &&
-             verifContentA == true ) {
-   
-             
-                $('#annonce_Poster').attr('type','submit');
-                $('#annonce_Poster').css('background','#0d6efd');
-                $('#annonce_Poster').css('border-color','#0d6efd');
-
-            
-               
-          
-        }else{
+  if (
+         verifTitle == true && verifcategory == true && 
+         verifResumer == true && verifFirstTitle == true &&
+         verifContentA == true ) {
+         
+            $('#annonce_Poster').attr('type','submit');
+            $('#annonce_Poster').css('background','#0d6efd');
+            $('#annonce_Poster').css('border-color','#0d6efd');      
+      
+    }
+        else{
 
             $('#annonce_Poster').attr('type','button');
             $('#annonce_Poster').css('background','LightGray');

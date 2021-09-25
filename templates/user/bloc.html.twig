@@ -25,6 +25,10 @@
 
 <!-- ======= Blog Section ======= -->
 <section id="blog" class="blog">
+
+{% for item in data %}
+  
+
   <div class="container" data-aos="fade-up">
 
     <div class="row">
@@ -34,17 +38,22 @@
         <article class="entry">
 
           <div class="entry-img">
-            <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+          {% if "mp4" in item.file %}
+              <video src="/image/{{item.file}}" class="img-fluid"  controls></video>
+          {% else %}   
+             <img src="image/{{item.file}}" alt="" class="img-fluid" style="width:100%"> 
+          {% endif %}
+           
           </div>
 
           <h2 class="entry-title">
-            <a href="blog-single.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
+            <a href="blog-single.html">{{item.title}}</a>
           </h2>
 
           <div class="entry-meta">
             <ul>
-              <li class="d-flex align-items-center" id="aimer"><i class="bi bi-hand-thumbs-up" id='A1'><span id="number_like">3</span></i></li>
-              <li class="d-flex align-items-center" id='detester'> <i class="bi bi-hand-thumbs-down" id='A2'><span id="number_unlike">3</span></i></li>
+              <li class="d-flex align-items-center" id="aimer{{item.id}}"><i class="bi bi-hand-thumbs-up" id='A1{{item.id}}'><span id="number_like{{item.id}}">3</span></i></li>
+              <li class="d-flex align-items-center" id='detester{{item.id}}'> <i class="bi bi-hand-thumbs-down" id='A2{{item.id}}'><span id="number_unlike{{item.id}}">3</span></i></li>
               <li class="d-flex align-items-center" ><i class="bi bi-clock"></i>jan 2012</li>
               <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#"  style='text-decoration:none' data-toggle ="modal" data-target ="#commentaire" >12 Comments</a></li>
             
@@ -52,9 +61,127 @@
             </ul>
           </div>
 
-        
+    
         </article><!-- End blog entry -->
 
+
+        
+{# recuperation des commentaire #}
+
+<script>
+{# sytheme d'envoie de commentaire sur une annonce #}
+
+
+  $('#coter').on('click',function(){
+    alert('jute toi et moi');
+   var path=$('#toke').val();
+    $.ajax({
+      url:path,
+      method:"post",
+      data:{
+       commentaire:$('#commentaires').val(),
+       email:$('#email').val();
+      },success:function(e){
+
+        $('#number_unlike{{item.id}}').html(e);
+        $('#A2').css("color","dodgerblue");
+
+      },error:function(e){
+
+      
+    }
+    });
+    
+  });
+
+ 
+</script>
+
+<script>
+ {# synteme de like et d'unlike  d'une annonce #}
+
+$(()=>{
+  
+
+ var like = false;
+
+ var unlike = false;
+ 
+
+
+  $('#aimer{{item.id}}').on('click',function(){
+    var path=$('#path_like').val();
+    var annonce = {{item.id}};
+    
+ if(like == false && unlike == false){
+
+    if( like == false){
+    $.ajax({
+      url:path,
+      method:"post",
+      data:{
+        annonce:annonce,
+      },success:function(e){
+        $('#number_like{{item.id}}').html(e);
+        $('#A1{{item.id}}').css("color","dodgerblue");
+      },error:function(e){
+
+      }
+    });
+  like = true;
+
+    }
+ }
+  });
+
+ 
+ 
+
+  
+
+
+
+  $('#detester{{item.id}}').on('click',function(){
+    
+    var path=$('#path_dislike').val();
+    var annonce = {{item.id}};
+  
+if(unlike == false && like == false){
+
+    if(unlike == false){
+
+    $.ajax({
+      url:path,
+      method:"post",
+      data:{
+        annonce:annonce,
+      },success:function(e){
+
+        $('#number_unlike{{item.id}}').html(e);
+        $('#A2{{item.id}}').css("color","dodgerblue");
+
+      },error:function(e){
+
+      
+    }
+    });
+    unlike = true;
+
+    }
+
+    }
+
+  });
+
+
+});
+
+
+
+
+</script>
+
+  {% endfor %} 
        
        
        
@@ -214,147 +341,6 @@ let modal = new Modal('#commentaire');
 
 
 
-
-{# recuperation des commentaire #}
-
-<script>
-
-
-
-  $('#coter').on('click',function(){
-    alert('jute toi et moi');
-   var path=$('#toke').val();
-    $.ajax({
-      url:path,
-      method:"post",
-      data:{
-       commentaire:$('#commentaires').val(),
-       email:$('#email').val();
-      },success:function(e){
-
-        $('#number_unlike').html(e);
-        $('#A2').css("color","dodgerblue");
-
-      },error:function(e){
-
-      
-    }
-    });
-    
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-
-<script>
-
-
-{# evement sur le  bouton like et dislike #}
-$(()=>{
-  
-
- var like = false;
-
- var unlike = false;
- 
-
-
-  $('#aimer').on('click',function(){
-    var path=$('#path_like').val();
-    var annonce =$('#Annonce').attr('id');
-    var id =32;
- if(like == false && unlike == false){
-
-    if( like == false){
-    $.ajax({
-      url:path,
-      method:"post",
-      data:{
-        annonce:id,
-      },success:function(e){
-        $('#number_like').html(e);
-        $('#A1').css("color","dodgerblue");
-      },error:function(e){
-
-      }
-    });
-  like = true;
-
-    }
- }
-  });
-
- 
- 
-
-  
-
-
-  $('#detester').on('click',function(){
-    
-    var path=$('#path_dislike').val();
-    var annonce =$('#Annonce').attr('id');
-    var id =32;
-if(unlike == false && like == false){
-
-    if(unlike == false){
-
-    $.ajax({
-      url:path,
-      method:"post",
-      data:{
-        annonce:id,
-      },success:function(e){
-
-        $('#number_unlike').html(e);
-        $('#A2').css("color","dodgerblue");
-
-      },error:function(e){
-
-      
-    }
-    });
-    unlike = true;
-
-    }
-
-    }
-
-  });
-
-
-});
-
-
-
-
-</script>
 
  
 

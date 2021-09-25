@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonce;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -100,7 +101,9 @@ class UserController extends AbstractController
     #[Route('/bloc', name: 'bloc')]
     public function bloc(): Response
     {
-        return $this->render('user/bloc.html.twig');   
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findAll();
+        l
+        return $this->render('user/bloc.html.twig',["data"=>$annonce]);   
     }
     /**
      * route pour le contact
