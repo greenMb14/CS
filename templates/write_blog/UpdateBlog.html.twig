@@ -65,14 +65,7 @@
 
  
 
-          <div class="form-group">
-              <label  for="annonce_file">
-               <i class="fas fa-download icon-flag text-#4e73df-50"></i>
-               Choisire Votre Fichier (image/Video)<strong style="color:red">*</strong> 
-              </label> 
-              {{form_widget(form.file,{"attr": {"class":"custom-file-input","placeholder":" Saisire le resumer de votre Annonce","id":"validatedCustomFile"}})}}
-            {# <input type="file" class="custom-file-input"  name="file" id="validatedCustomFile" required>            #}
-        </div>
+        
 
     {# espace de saisis propement dite #}
 
@@ -136,7 +129,7 @@
   
     
     <!-- End Contact Section -->
- <script src="/mju/lib/js/Annonce.js">
+ <script src="{{asset('js/UpdateAnnonce.js')}}">
  
 </script> 
 {% endblock %}

@@ -23,42 +23,51 @@
           </div>
         {% endfor %}
   
-           <table class="table table-dark table-striped">
-             <thead class="thead-primary">
-                <tr>
-                <th scope="col">Titre</th>
-                <th scope="col">Fichier</th>
-                </tr>
-            </thead>
-            <tbody>
- 
+            
+     <div class="row">
             {% for value in data %}
-                <tr>
-                <th scope="row">{{value.title}}</th>
-                <td scope="row">
-                {% if "mp4" in value.file %}
-                  <video src="/image/{{value.file}}"  style="width:130px;height:100px;border-radius:10px" controls></video>
-                  {% else %}
-                     <img src="/image/{{value.file}}" style="width:130px;height:100px;border-radius:10px">
-                  {% endif %}
-                
-               
-                </td>
-                <td scope="row">
-                   <a  href="{{path('Updateblog',{'id':value.id})}}">
-                      <button class="btn btn-warning text-white" id="voirAnnonce" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                   </a>
-               
-                   <a  href="{{path('Deleteblog',{'id':value.id})}}">
-                       <button class="btn btn-danger" id="oirAnnonce" ><i class="fa fa-trash-o" ></i></button>
-                   </a>
-                </td>
-                </tr>
+
+                 <div class="col-xl-4 col-lg-4">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h4 style="color:#37517e;margin-left:2em;padding-top:0.5em">Titre:{{value.title}}</h4> 
+                                     <h6 style="font-family:Segoe UI Light;color:grey;margin-left:2em">Categorie:{{value.category}}</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <div style="width:100%;display:flex;justify-content: space-around;flex-wrap:wrap;">
+                                         {% if "mp4" in value.file %}
+                                          <video src="/image/{{value.file}}"  style="width:70%;height:200px;padding-bottom:2em;border-radius:15px" controls></video>
+                                          {% else %}
+                                             <img src="/image/{{value.file}}"  style="width:70%;height:200px;padding-bottom:2em;border-radius:15px" id="listeAnnonce">
+                                          {% endif %}
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                           <a  href="{{path('Updateblog',{'id':value.id})}}">
+                                            <i class="fa fa-pencil" aria-hidden="true"  style="color:orange;font-size:20px;"></i>
+                                          </a>
+                                        </span>
+                                        <span class="mr-2">
+                                        <a  href="{{path('Deleteblog',{'id':value.id})}}">
+                                           <i class="fa fa-trash-o" style="color:red;font-size:20px;margin-left:5em"></i>
+                                         </a>
+                                        </span>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
  
             {% endfor %}
-                
-          </tbody>
-        </table>
+ 
+        </div>
         </div>
         </div>
        
