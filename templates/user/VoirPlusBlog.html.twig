@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<main id="main">
+
+
+ 
+
+
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Blog</h2>
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li>Blog</li>
+      </ol>
+    </div>
+
+  </div>
+</section><!-- End Breadcrumbs -->
+
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+
+{% for item in data %}
+  
+
+
+
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+
+      <div class="col-lg-8 entries">
+
+        <article class="entry">
+
+          <div class="entry-img">
+          {% if "mp4" in item.file %}
+              <video src="/image/{{item.file}}" class="img-fluid"  controls></video>
+          {% else %}   
+             <img src="image/{{item.file}}" alt="" class="img-fluid" style="width:100%"> 
+          {% endif %}
+           
+          </div>
+
+          <h2 class="entry-title">
+            {{item.title}}
+          </h2>
+
+          <div class="entry-meta">
+            <ul>
+              <li class="d-flex align-items-center" id="aimer{{item.id}}"><i class="bi bi-hand-thumbs-up" ><span >{{item.category}}</span></i> </li>
+              <li class="d-flex align-items-center" id='detester{{item.id}}'> <i class="bi bi-hand-thumbs-down" ><span  >{{item.resumer}}</span></i></li>
+  
+               
+            </ul>
+          </div>
+
+    
+        </article> 
+
+
+
+
+
+ 
+  {% endfor %} 
+       
+       
+       
+       
+
+      </div><!-- End blog entries list -->
+
+ 
+
+      </div><!-- End blog sidebar -->
+
+    </div>
+
+  </div>
+</section> 
+
+
+
+ 
+
+
+</main>
+
+
+<!-- End #main -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src='/assets/js/jquery-3.6.0.min.js'></script>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+{% endblock %}
+
+
+

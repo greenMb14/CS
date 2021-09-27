@@ -60,6 +60,7 @@ class WriteBlogController extends AbstractController
             $thirtTitle =  $Annonce->getThirtTitle();
             $contentC =  $Annonce->getContentC();
             $file = $Annonce->getFile();
+         
 
 
             try {

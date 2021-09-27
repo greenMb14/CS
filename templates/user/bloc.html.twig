@@ -89,8 +89,11 @@
               <li class="d-flex align-items-center" id='detester{{item.id}}'> <i class="bi bi-hand-thumbs-down" id='A2{{item.id}}'><span id="number_unlike{{item.id}}">0</span></i></li>
               <li class="d-flex align-items-center" ><i class="bi bi-clock"></i>jan 2012</li>
               <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#" id="numberComent{{item.id}}" style='text-decoration:none' data-toggle ="modal" data-target ="#commentaire{{item.id}}" >0 Commentaires</a></li>
-            
- 
+              <li class="d-flex align-items-center">
+                <a href="{{path('VoirPlusSur_Article',{'id':item.id})}}">
+                 <i class="bi bi-arrow-right-square"></i>Voir Plus......
+                </a>
+              </li>
             </ul>
           </div>
 

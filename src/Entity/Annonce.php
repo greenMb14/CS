@@ -67,6 +67,11 @@ class Annonce
      */
     private $ContentC;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createDate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +193,18 @@ class Annonce
     public function setContentC(?string $ContentC): self
     {
         $this->ContentC = $ContentC;
+
+        return $this;
+    }
+
+    public function getCreateDate(): ?\DateTimeInterface
+    {
+        return $this->createDate;
+    }
+
+    public function setCreateDate(?\DateTimeInterface $createDate): self
+    {
+        $this->createDate = $createDate;
 
         return $this;
     }

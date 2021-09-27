@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonce;
 use App\Entity\Commentaires;
 use App\Entity\LikeAnnonce;
 use App\Entity\UnlikeAnnonce;
@@ -291,6 +292,37 @@ class ActionUserFromBlogController extends AbstractController
  
      
      } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       //   recuperation de toutes les infos lier a article
+
+
+   
+       #[Route('/VoirPlusSur/Article/{id}', name: 'VoirPlusSur_Article')]
+
+       public function VoirPlusSur_Article($id)
+       {
+   
+             //  recuperation   d'une annonce
+        
+          $Annonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(["id"=>$id]);
+           return $this->render('user/VoirPlusBlog.html.twig',["data"=>$Annonce]);
+       
+       } 
 
 
 }
