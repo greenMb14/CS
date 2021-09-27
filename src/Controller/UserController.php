@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\Commentaires;
+use App\Entity\LikeAnnonce;
+use App\Entity\UnlikeAnnonce;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +24,12 @@ class UserController extends AbstractController
     {
         $this->passwordEncode=$passwordEncode;
     }
+   
     
+
+
+
+
 
 
     #[Route('/', name: 'user')]
@@ -29,6 +37,12 @@ class UserController extends AbstractController
     {
         return $this->render('user/Acceuil.html.twig');   
     }
+
+
+
+
+
+
 
     /**
      * route por l'equipe de la structure
@@ -40,6 +54,14 @@ class UserController extends AbstractController
         return $this->render('user/team.html.twig');   
     }
 
+
+
+
+
+
+
+
+
     /**
      * route pour le temoiniage
      */
@@ -50,11 +72,28 @@ class UserController extends AbstractController
         return $this->render('user/testimony.html.twig');   
     }
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
     #[Route('/response', name: 'response')]
     public function Tes(): Response
     {
         return $this->render('message/lala.html.twig');   
     }
+
+
+
+
+
+
+
+
 
     /**
      * route pour les services 
@@ -66,11 +105,27 @@ class UserController extends AbstractController
         return $this->render('user/serviceWed.html.twig');   
     }
 
+
+
+
+
+
+
+
+
+
     #[Route('/ServiceDigital', name: 'ServiceDigital')]
     public function SeviceDigital(): Response
     {
         return $this->render('user/serviceDigital.html.twig');   
     }
+
+
+
+
+
+
+
 
     #[Route('/ServiceVideos', name: 'ServiceVideos')]
     public function SeviceVideo(): Response
@@ -78,11 +133,23 @@ class UserController extends AbstractController
         return $this->render('user/serviceVideo.html.twig');   
     }
 
+
+
+
+
+
+
     #[Route('/ServiceGrafic', name: 'ServiceGrafic')]
     public function SeviceGrafic(): Response
     {
         return $this->render('user/serviceGrafique.html.twig');   
     }
+
+
+
+
+
+
 
 
 
@@ -97,14 +164,30 @@ class UserController extends AbstractController
         return $this->render('user/porfolio.html.twig');   
     }
 
+
+
+
+
+
+
+
+
  
     #[Route('/bloc', name: 'bloc')]
     public function bloc(): Response
     {
         $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findAll();
-        l
-        return $this->render('user/bloc.html.twig',["data"=>$annonce]);   
+        // $historique = $this->getDoctrine()->getRepository(Annonce::class)->findBy(['id'=>'desc']);
+        // dd($historique);
+        return $this->render('user/bloc.html.twig',["data"=>$annonce,]);   
     }
+
+
+
+
+
+
+
     /**
      * route pour le contact
      */
@@ -115,6 +198,12 @@ class UserController extends AbstractController
         return $this->render('user/contact.html.twig');   
     }
     
+
+
+
+
+
+
 
     /**
      * route de redirection au formullaire d inscription
@@ -127,11 +216,29 @@ class UserController extends AbstractController
     }
 
 
+
+
+
+
+
+
+
+
+
     #[Route('/test', name: 'test')]
     public function sup(): Response
     {
         return $this->render('message/index.html.twig');   
     }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,14 +267,12 @@ class UserController extends AbstractController
     }
 
 
-    /**
-     * ce controlleur est dedier a la redirection du user et Admin chacun dans
-     * le controlleur le concernant
-     * 
-     */
 
 
-   
+
+
+
+
 
 
 }

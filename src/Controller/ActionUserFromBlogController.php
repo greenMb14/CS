@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ActionUserFromBlogController extends AbstractController
 {
+
+
+
+
+
     #[Route('/like/annonce', name: 'like_annonce')]
     public function like_annonce(Request $request,EntityManagerInterface $em)
     {
@@ -136,19 +141,156 @@ class ActionUserFromBlogController extends AbstractController
     #[Route('/commentaire', name: 'commentaire')]
 
      public function commentaitre(Request $request,EntityManagerInterface $em){
-         $ommentaire=$request->request->get('commentaire');
-         $idAnnonce='';
+
+         $Commentaire=$request->request->get('commentaire');
+         $idAnnonce=$request->request->get("id");
          $email=$request->request->get('email');
+
          $comment=new Commentaires();
-         $comment->setCommentaires('');
-         $comment->setEmail('');
-         $comment->setIdAnnonce('');
+
+         $comment->setCommentaires($Commentaire);
+         $comment->setEmail($email);
+         $comment->setIdAnnonce($idAnnonce);
          $em->persist($comment);
          $em->flush();
+
+        //  recuperation du nombre de commentaire
+
+        $nombreCommentaires = $this->getDoctrine()->getRepository(Commentaires::class)->findAll();
+        for ($i=0; $i <count($nombreCommentaires) ; $i++) { 
+            
+            if ($nombreCommentaires[$i]->getIdAnnonce() == $idAnnonce) {
+                 
+                $nombre[] = $nombreCommentaires[$i]->getIdAnnonce();
+            }
+        }
+    
+         return new Response(count($nombre)." "."Commentaires");
 
      }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+    //  recuperation des likes d'une annonce
+
+
+   
+    #[Route('/loadlike', name: 'loadlike')]
+    public function loadlike(Request $request)
+    {
+
+          //  recuperation du nombre de like d'une annonce
+      $nombre[] = null;
+
+      $idAnnonce = $request->request->get('id');
+
+        $like = $this->getDoctrine()->getRepository(LikeAnnonce::class)->findAll();
+       
+         for ($i=0; $i <count($like) ; $i++) { 
+             
+             if ($like[$i]->getIdAnnonce() == $idAnnonce) {
+                  
+                 $nombre[] =  $like[$i]->getIdAnnonce();
+             }
+         }
+     
+          return new Response(count($nombre));
+
+    
+    } 
+
+ 
+    
+
+
+
+
+
+
+
+
+     //  recuperation des unlikes d'une annonce
+
+
+   
+     #[Route('/loadunlike', name: 'loadunlike')]
+     public function loadunlike(Request $request)
+     {
+ 
+           //  recuperation du nombre de like d'une annonce
+       $nombre[] = null;
+ 
+       $idAnnonce = $request->request->get('id');
+ 
+         $unlike = $this->getDoctrine()->getRepository(UnLikeAnnonce::class)->findAll();
+        
+          for ($i=0; $i <count($unlike) ; $i++) { 
+              
+              if ($unlike[$i]->getIdAnnonce() == $idAnnonce) {
+                   
+                  $nombre[] =  $unlike[$i]->getIdAnnonce();
+              }
+          }
+      
+           return new Response(count($nombre));
+ 
+     
+     } 
+
+
+
+
+
+
+
+
+
+
+
+
+     
+     //  recuperation du nombre de commentiares au chargement de la page d'une annonce
+
+
+   
+     #[Route('/load/number/Commentaire', name: 'load_number_Commentaire')]
+     public function load_number_Commentaire(Request $request)
+     {
+ 
+           //  recuperation du nombre commentaire d'une annonce
+       $nombre[] = null;
+ 
+       $idAnnonce = $request->request->get('id');
+ 
+         $numberComments = $this->getDoctrine()->getRepository(Commentaires::class)->findAll();
+        
+          for ($i=0; $i <count($numberComments) ; $i++) { 
+              
+              if ($numberComments[$i]->getIdAnnonce() == $idAnnonce) {
+                   
+                  $nombre[] =  $numberComments[$i]->getIdAnnonce();
+              }
+          }
+      
+           return new Response(count($nombre)." "."Commentaires");
+ 
+     
+     } 
 
 
 }

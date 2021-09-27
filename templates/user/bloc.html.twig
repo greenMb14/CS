@@ -8,6 +8,37 @@
 
 <main id="main">
 
+
+
+  {# blog pour modale boostrap et autre #}
+{% for item in data %}
+
+
+<div class="modal" tabindex="-1" id='commentaire{{item.id}}'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Commentaires</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="commentaire" aria-label="Close"></button>
+      </div>
+      <form>
+      <div class="modal-body">
+         <input type='text' id='email{{item.id}}' class="form-control" placeholder="Enter votre E_mail..."><br>
+         <textarea class="form-control" placeholder="Enter votre commentaire..." id="commentairesContent{{item.id}}" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        
+
+        <button type="button" id="submit{{item.id}}" class="btn btn-priary" style='background-color:dodgerblue;color:white'>valider</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+
 <!-- ======= Breadcrumbs ======= -->
 <section id="breadcrumbs" class="breadcrumbs">
   <div class="container">
@@ -28,6 +59,8 @@
 
 {% for item in data %}
   
+
+
 
   <div class="container" data-aos="fade-up">
 
@@ -52,10 +85,10 @@
 
           <div class="entry-meta">
             <ul>
-              <li class="d-flex align-items-center" id="aimer{{item.id}}"><i class="bi bi-hand-thumbs-up" id='A1{{item.id}}'><span id="number_like{{item.id}}">3</span></i></li>
-              <li class="d-flex align-items-center" id='detester{{item.id}}'> <i class="bi bi-hand-thumbs-down" id='A2{{item.id}}'><span id="number_unlike{{item.id}}">3</span></i></li>
+              <li class="d-flex align-items-center" id="aimer{{item.id}}"><i class="bi bi-hand-thumbs-up" id='A1{{item.id}}'><span id="number_like{{item.id}}">0</span></i> </li>
+              <li class="d-flex align-items-center" id='detester{{item.id}}'> <i class="bi bi-hand-thumbs-down" id='A2{{item.id}}'><span id="number_unlike{{item.id}}">0</span></i></li>
               <li class="d-flex align-items-center" ><i class="bi bi-clock"></i>jan 2012</li>
-              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#"  style='text-decoration:none' data-toggle ="modal" data-target ="#commentaire" >12 Comments</a></li>
+              <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#" id="numberComent{{item.id}}" style='text-decoration:none' data-toggle ="modal" data-target ="#commentaire{{item.id}}" >0 Commentaires</a></li>
             
  
             </ul>
@@ -65,36 +98,155 @@
         </article><!-- End blog entry -->
 
 
-        
-{# recuperation des commentaire #}
+
+
 
 <script>
-{# sytheme d'envoie de commentaire sur une annonce #}
+{# fonction de recuperation des likes d'une annonce #}
+
+$(()=>{
+  var loadlike = setInterval(function(){
 
 
-  $('#coter').on('click',function(){
-    alert('jute toi et moi');
-   var path=$('#toke').val();
-    $.ajax({
+    var path = $('#path_loadlike').val();
+    var annonce = {{item.id}};
+  
+      $.ajax({
       url:path,
       method:"post",
       data:{
-       commentaire:$('#commentaires').val(),
-       email:$('#email').val();
+       id:annonce,
       },success:function(e){
+         $("#number_like{{item.id}}").html(e);
+      },error:function(e){  
+      }
+    }); 
 
-        $('#number_unlike{{item.id}}').html(e);
-        $('#A2').css("color","dodgerblue");
+    clearInterval(loadlike);
+  },1000)
 
-      },error:function(e){
 
-      
-    }
-    });
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+{# fonction de recuperation des unlikes d'une annonce #}
+
+$(()=>{
+  var unloadlike = setInterval(function(){
+
+
+    var path = $('#path_loadunlike').val();
+    var annonce = {{item.id}};
+  
+      $.ajax({
+      url:path,
+      method:"post",
+      data:{
+       id:annonce,
+      },success:function(e){
+         $("#number_unlike{{item.id}}").html(e);
+      },error:function(e){  
+      }
+    }); 
+
+    clearInterval(unloadlike);
+  },1500)
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+<script>
+{# fonction de recuperation des unlikes d'une annonce #}
+
+$(()=>{
+  var loadComments = setInterval(function(){
+
+
+    var path = $('#path_loadComment').val();
+    var annonce = {{item.id}};
+  
+      $.ajax({
+      url:path,
+      method:"post",
+      data:{
+       id:annonce,
+      },success:function(e){
+         $("#numberComent{{item.id}}").html(e);
+      },error:function(e){  
+      }
+    }); 
+
+    clearInterval(loadComments);
+  },2000)
+
+
+});
+
+
+</script>
+
+
+ 
+
+
+
+
+
+{# recuperation des commentaire #}
+
+<script>
+
+{# sytheme d'envoie de commentaire sur une annonce #}
+$(()=>{
+
+  $('#submit{{item.id}}').on('click',function(){
+
+    $('#commentairesContent{{item.id}}').val(null);
+    $('#email{{item.id}}').val(null);
+ 
+    var path = $('#path_commentaireAnnonce').val();
+    var annonce = {{item.id}};
+     $.ajax({
+      url:path,
+      method:"post",
+      data:{
+      commentaire:$('#commentairesContent{{item.id}}').val(),
+       email:$('#email{{item.id}}').val(),
+       id:annonce,
+      },success:function(e){
+        
+      },error:function(e){  
+      }
+    }); 
+
+   
     
   });
 
- 
+});
+
+
 </script>
 
 <script>
@@ -260,8 +412,10 @@ if(unlike == false && like == false){
 
 <input type="hidden" id="path_like" value="{{path('like_annonce')}}">
 <input type="hidden" id="path_dislike" value="{{path('dislike_annonce')}}">
-<input type="hidden" id="toke" value="{{path('commentaire')}}">
-
+<input type="hidden" id="path_commentaireAnnonce" value="{{path('commentaire')}}">
+<input type="hidden" id="path_loadlike" value="{{path('loadlike')}}">
+<input type="hidden" id="path_loadunlike" value="{{path('loadunlike')}}">
+<input type="hidden" id="path_loadComment" value="{{path('load_number_Commentaire')}}">
 
 
 
@@ -270,44 +424,7 @@ if(unlike == false && like == false){
 {# blog pour modale boostrap et autre #}
 
 
-
-<div class="modal" tabindex="-1" id='commentaire'>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Commentaires</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="commentaire" aria-label="Close"></button>
-      </div>
-      <form>
-      <div class="modal-body">
-         <input type='text' id='commentaire' class="form-control" placeholder="Enter votre E_mail..."><br>
-         <textarea class="form-control" placeholder="Enter votre commentaire..." id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <div class="modal-footer">
-        
-
-        <button type="button" id='coter' class="btn btn-priary" style='background-color:dodgerblue;color:white'>valider</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
