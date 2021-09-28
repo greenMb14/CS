@@ -320,7 +320,17 @@ class ActionUserFromBlogController extends AbstractController
              //  recuperation   d'une annonce
         
           $Annonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(["id"=>$id]);
-           return $this->render('user/VoirPlusBlog.html.twig',["data"=>$Annonce]);
+
+          $Commentaire = $this->getDoctrine()->getRepository(Commentaires::class)->findBy(["id_annonce"=>$id]);
+
+          $nombrelike = count($this->getDoctrine()->getRepository(LikeAnnonce::class)->findBy(["id_annonce"=>$id]));
+
+          $nombreunlike = count($this->getDoctrine()->getRepository(UnlikeAnnonce::class)->findBy(["id_annonce"=>$id]));
+
+          $nombre = count($Commentaire);
+         
+           return $this->render('user/VoirPlusBlog.html.twig',
+           ["data"=>$Annonce,"Commentaire"=>$Commentaire,"nombre"=>$nombre,"like"=>$nombrelike,"unlike"=>$nombreunlike]);
        
        } 
 

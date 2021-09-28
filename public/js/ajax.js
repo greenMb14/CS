@@ -12,9 +12,7 @@ $(document).ready(function(){
 
         var email = $("#articletchat input:last").val();
 
-
-        // alert(email);
-        // alert($("#message").val());
+ 
 
 
         if ($("#message").val() != "envoyer votre message ici" && $("#message").val() != "") {
@@ -99,7 +97,7 @@ $("#message").on("focus",function(){
 
 }
 
-//  clearInterval(load);
+ 
  
 },8000);
 
@@ -155,9 +153,5 @@ var notif = setInterval(function(){
  
  
  
-//  if (valeurPath) {
  
-//      clearInterval(notif);
-     
-//  }
  },5000);

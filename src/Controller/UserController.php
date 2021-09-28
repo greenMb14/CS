@@ -176,10 +176,13 @@ class UserController extends AbstractController
     #[Route('/bloc', name: 'bloc')]
     public function bloc(): Response
     {
-        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findAll();
-        // $historique = $this->getDoctrine()->getRepository(Annonce::class)->findBy(['id'=>'desc']);
-        // dd($historique);
-        return $this->render('user/bloc.html.twig',["data"=>$annonce,]);   
+ 
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(array(),array('id' => 'DESC'),2); 
+
+        $AllAnnonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(array(),array('id' => 'DESC')); 
+
+            
+        return $this->render('user/bloc.html.twig',["data"=>$annonce,"Alldata"=>$AllAnnonce]);   
     }
 
 

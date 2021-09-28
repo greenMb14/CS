@@ -111,6 +111,6 @@ var load = setInterval(function(){
 
 }
 
-// clearInterval(load);
+ 
  
 },8000);
