@@ -8,19 +8,27 @@ $(()=>{
     var verifResumer = false;
     var  verifFirstTitle = false;
     var  verifContentA = false;
- 
+    $('#annonce_title').val(null);
+    $('#annonce_category').val(null);
+    $('#annonce_resumer').val(null); 
+    $('#annonce_firstTitle').val(null); 
+    $('#annonce_ContentA').val(null);
+    $('#annonce_secondTitle').val(null); 
+    $('#annonce_ContentC').val(null);
+    $('#annonce_thirtTitle').val(null); 
+    $('#annonce_ContentB').val(null);
  
     // verfication du champ de saisie du titre
     $('#annonce_title').on('blur',function(){
       
         var titre = $('#annonce_title').val(); 
-         if (/[A-Z]/.test(titre)){
+         if (/[A-Z]/.test(titre) && titre.length > 8){
             $('#annonce_title').css('border-color','#36b9cc');
             $('#titre').html("");
             verifTitle = true;
-         }else if(titre.length < 8){
+         }else if(titre.length <= 8){
             $('#annonce_title').css('border-color','red');
-            $('#titre').html('votre champs doit contenir au moins 8 caracteres');
+            $('#titre').html('votre champs doit contenir au moins 9 caracteres');
             $('#titre').css('color','red');
             verifTitle = false;
          }else{
@@ -37,13 +45,13 @@ $(()=>{
      $('#annonce_category').on('blur',function(){
       
         var category = $('#annonce_category').val(); 
-         if (/[A-Z]/.test(category)){
+         if (/[A-Z]/.test(category) && category.length > 8){
             $('#annonce_category').css('border-color','#36b9cc');
             $('#category').html('');
             verifcategory = true;
-         }else if(category.length < 8){
+         }else if(category.length <= 8){
             $('#annonce_category').css('border-color','red');
-            $('#category').html('votre champs doit contenir au moins 8 caracteres');
+            $('#category').html('votre champs doit contenir au moins 9 caracteres');
             $('#category').css('color','red');
             verifcategory = false;
          }else{
@@ -62,11 +70,11 @@ $(()=>{
      $('#annonce_resumer').on('blur',function(){
       
         var resumer = $('#annonce_resumer').val(); 
-         if (/[a-zA-Z0-9]/.test(resumer)){
+         if (/[a-zA-Z0-9]/.test(resumer) && resumer.length > 99){
             $('#annonce_resumer').css('border-color','#36b9cc');
             $('#resumer').html('');
             verifResumer = true;
-         }else if(resumer.length < 100){
+         }else if(resumer.length <= 99){
             $('#annonce_resumer').css('border-color','red');
             $('#resumer').html('votre champs doit contenir au moins 100 caracteres');
             $('#resumer').css('color','red');
@@ -88,13 +96,13 @@ $(()=>{
       $('#annonce_firstTitle').on('blur',function(){
       
         var firstTitle = $('#annonce_firstTitle').val(); 
-         if (/[A-Z]/.test(firstTitle)){
+         if (/[A-Z]/.test(firstTitle) && firstTitle.length > 8){
             $('#annonce_firstTitle').css('border-color','#36b9cc');
             $('#firstTitle').html('');
             verifFirstTitle = true;
-         }else if(firstTitle.length < 8){
+         }else if(firstTitle.length <= 8){
             $('#annonce_firstTitle').css('border-color','red');
-            $('#firstTitle').html('votre champs doit contenir au moins 8 caracteres');
+            $('#firstTitle').html('votre champs doit contenir au moins 9 caracteres');
             $('#firstTitle').css('color','red');
             verifFirstTitle = false;
          }else{
@@ -113,11 +121,11 @@ $(()=>{
       $('#annonce_ContentA').on('blur',function(){
       
         var ContentA = $('#annonce_ContentA').val(); 
-         if (/[a-zA-Z0-9]/.test(ContentA)){
+         if (/[a-zA-Z0-9]/.test(ContentA) && ContentA.length > 99){
             $('#annonce_ContentA').css('border-color','#36b9cc');
             $('#ContentA').html('');
             verifContentA = true;
-         }else if(ContentA.length < 100){
+         }else if(ContentA.length <= 99){
             $('#annonce_ContentA').css('border-color','red');
             $('#ContentA').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentA').css('color','red');
@@ -140,13 +148,13 @@ $(()=>{
       $('#annonce_secondTitle').on('blur',function(){
       
         var secondTitle = $('#annonce_secondTitle').val(); 
-         if (/[A-Z]/.test(secondTitle)){
+         if (/[A-Z]/.test(secondTitle) && secondTitle.length > 8){
             $('#annonce_secondTitle').css('border-color','#36b9cc');
             $('#secondTitle').html('');
      
-         }else if(secondTitle.length < 8){
+         }else if(secondTitle.length <= 8){
             $('#annonce_secondTitle').css('border-color','red');
-            $('#secondTitle').html('votre champs doit contenir au moins 8 caracteres');
+            $('#secondTitle').html('votre champs doit contenir au moins 9 caracteres');
             $('#secondTitle').css('color','red');
        
          }else{
@@ -165,11 +173,11 @@ $(()=>{
        $('#annonce_ContentB').on('blur',function(){
       
         var ContentB = $('#annonce_ContentB').val(); 
-         if (/[a-zA-Z0-9]/.test(ContentB)){
+         if (/[a-zA-Z0-9]/.test(ContentB) && ContentB.length > 99){
             $('#annonce_ContentB').css('border-color','#36b9cc');
             $('#ContentB').html('');
        
-         }else if(ContentB.length < 100){
+         }else if(ContentB.length <= 99){
             $('#annonce_ContentB').css('border-color','red');
             $('#ContentB').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentB').css('color','red');
@@ -193,13 +201,13 @@ $(()=>{
        $('#annonce_thirtTitle').on('blur',function(){
       
         var thirtTitle = $('#annonce_thirtTitle').val(); 
-         if (/[A-Z]/.test(thirtTitle)){
+         if (/[A-Z]/.test(thirtTitle) && thirtTitle.length > 8){
             $('#annonce_thirtTitle').css('border-color','#36b9cc');
             $('#thirtTitle').html('');
   
-         }else if(thirtTitle.length < 8){
+         }else if(thirtTitle.length <= 8){
             $('#annonce_thirtTitle').css('border-color','red');
-            $('#thirtTitle').html('votre champs doit contenir au moins 8 caracteres');
+            $('#thirtTitle').html('votre champs doit contenir au moins 9 caracteres');
             $('#thirtTitle').css('color','red');
          
          }else{
@@ -216,11 +224,11 @@ $(()=>{
        $('#annonce_ContentC').on('blur',function(){
       
         var ContentC = $('#annonce_ContentC').val(); 
-         if (/[a-zA-Z0-9]/.test(ContentC)){
+         if (/[a-zA-Z0-9]/.test(ContentC) && ContentC.length > 99){
             $('#annonce_ContentC').css('border-color','#36b9cc');
             $('#ContentC').html('');
              
-         }else if(ContentC.length < 100){
+         }else if(ContentC.length <= 99){
             $('#annonce_ContentC').css('border-color','red');
             $('#ContentC').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentC').css('color','red');

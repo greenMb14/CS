@@ -60,28 +60,48 @@ class WriteBlogController extends AbstractController
             $thirtTitle =  $Annonce->getThirtTitle();
             $contentC =  $Annonce->getContentC();
             $file = $Annonce->getFile();
-         
-
 
             try {
 
-           
-                $filename = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->getParameter('upload_destination'),$filename);
+        
+
+                if (
+                    $file->guessExtension() == "mp4"  or 
+                    $file->guessExtension() == "jpg" or 
+                    $file->guessExtension() == "jpeg" or
+                    $file->guessExtension() == "png"  ) {
+ 
+                        $filename = md5(uniqid()).'.'.$file->guessExtension();
+                        $file->move($this->getParameter('upload_destination'),$filename);
+
+                         // enregistrement des element du formulaire
+                        $Annonce->setTitle($title);
+                        $Annonce->setCategory($category);
+                        $Annonce->setFile($filename);
+                        $Annonce->setResumer($resumer);
+                        $Annonce->setFirstTitle($firstTitle);
+                        $Annonce->setContentA($contentA);
+                        $Annonce->setSecondTitle($secondTitle);
+                        $Annonce->setContentB($contentB);
+                        $Annonce->setThirtTitle($thirtTitle);
+                        $Annonce->setContentC($contentC);
+                        $entityManager->persist($Annonce);
+                        $entityManager->flush();
+                  
+                }else{
+
+                      //  mauvais format de fichier 
+
+                $this->addFlash(
+                    'erroFile',
+                    'votre format de fichier est incorrect, veuillez choisir un fichier au format MP4,JPG,JPEG ou PNG'
+                );
+
+                 return $this->render('Write_Blog/index.html.twig',['form'=>$form->createView()]); 
+
+                }
                 
-                // enregistrement des element du formulaire
-            
-                $Annonce->setCategory($category);
-                $Annonce->setFile($filename);
-                $Annonce->setResumer($resumer);
-                $Annonce->setFirstTitle($firstTitle);
-                $Annonce->setContentA($contentA);
-                $Annonce->setSecondTitle($secondTitle);
-                $Annonce->setContentB($contentB);
-                $Annonce->setThirtTitle($thirtTitle);
-                $Annonce->setContentC($contentC);
-                $entityManager->persist($Annonce);
-                $entityManager->flush();
+               
 
         // cas de l'operation d'enregistrement avec succes 
 
@@ -179,13 +199,14 @@ public function DeleteBlog($id)
     if (!$Annonce) {
         
         $this->addFlash("error","l'annonce n'a pas pu etre trouver, veuillez reesaiyer");
+        return $this->redirectToRoute('VoirAnnonce');
 
     }else {
 
         $entityManager->remove($Annonce);
         $entityManager->flush();
         $this->addFlash("success","votre annonce a bien ete supprimer!!!");
-        return $this->redirectToRoute('ListeAnnonce');
+        return $this->redirectToRoute('VoirAnnonce');
 
     }
 
@@ -226,7 +247,7 @@ public function DeleteBlog($id)
         if (!$Annonce) {
             
             $this->addFlash("error","l'annonce n'a pas pu etre trouver, veuillez reesaiyer");
-            return $this->redirectToRoute('ListeAnnonce');
+            return $this->redirectToRoute('VoirAnnonce');
 
         }else {
            $form = $this->createFormBuilder($Annonce)
@@ -249,7 +270,7 @@ public function DeleteBlog($id)
                $Update = $form->getData();
                $entityManager->flush();
                $this->addFlash("success","votre annonce a bien ete modifier!!!");
-               return $this->redirectToRoute('ListeAnnonce');
+               return $this->redirectToRoute('VoirAnnonce');
                
            }
          

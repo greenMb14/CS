@@ -22,10 +22,10 @@ class AnnonceType extends AbstractType
         ->add('file', FileType::class)
         ->add('firstTitle', TextType::class)
         ->add('ContentA', TextareaType::class)
-        ->add('secondTitle', TextType::class , array('required' => false,))
-        ->add('ContentB', TextareaType::class , array('required' => false,))
-        ->add('thirtTitle', TextType::class , array('required' => false,))
-        ->add('ContentC', TextareaType::class, array('required' => false,))
+        ->add('secondTitle', TextType::class , array('required' => false, ))
+        ->add('ContentB', TextareaType::class , array('required' => false, ))
+        ->add('thirtTitle', TextType::class , array('required' => false, ))
+        ->add('ContentC', TextareaType::class, array('required' => false, ))
         ->add("Poster", SubmitType::class)  
         ;
     }

@@ -36,42 +36,40 @@
              {{message}}
           </div>
         {% endfor %}
+
+
+
+         {% for message in app.flashes('erroFile') %}
+          <div class="alert alert-warning" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
      
 
  
 
       {{form_start(form,{'attr':{'style':'margin-bottom:3em;margin-top:3em'}})}}
 
-    {# < style="margin-bottom:3em" action="{{path('Traitement_DeLannonce')}}" method ="POST" enctype="multipart/data-form"> #}
-
+   
     {# espace resumer de l'annonce #}
         <div class="form-group">
             <label for="exampleInputEmail1">Titre de L'Annonce <strong style="color:red">*</strong></label>
-             {{form_widget(form.title,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce"}})}}
-            {# <input type="text" class="form-control" id="exampleInputEmail1" name="title" aria-describedby="emailHelp" placeholder="Titre de L'Annonce" required> #}
+             {{form_widget(form.title,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce" ,'minlength' : 8 }})}}
+            
             <small id="titre" style="color:ligthgrey">tout les champa suivi de l'etoile rouge sont obligatoire.</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Categories De L'Annonce<strong style="color:red">*</strong></label>
-              {{form_widget(form.category,{"attr": {"class":"form-control","placeholder":" Saisire votre Categorie"}})}}
+              {{form_widget(form.category,{"attr": {"class":"form-control","placeholder":" Saisire votre Categorie",'minlength' : 8 }})}}
                <small id="category" style="color:ligthgrey"></small>
-                    {# <select class="custom-select"  name="category" required>
-                        <option selected>---  ---</option>
-                        <option value="Marketting reseau">Marketting reseau</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                   </select> #}
+                
         </div>
        
         <div class="form-group">
                 <label for="exampleFormControlTextarea1">Contenu<strong style="color:red">*</strong></label>
-                 {{form_widget(form.resumer,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce"}})}}
+                 {{form_widget(form.resumer,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce" ,'minlength' : 100 }})}}
                   <small id="resumer" style="color:ligthgrey"></small>
-                {# <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  name="resumer" placeholder=" Saisire le resumer de votre Annonce" required></textarea> #}
+                
         </div>
 
  
@@ -91,54 +89,45 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1">Premier Sous-titre<strong style="color:red">*</strong></label>
-              {{form_widget(form.firstTitle ,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce"," aria-describedby":"emailHelp"}})}}
-               <small id="firstTitle" style="color:ligthgrey"></small>
-            {# <input type="text" class="form-control" id="exampleInputEmail1"  name="first_title" aria-describedby="emailHelp" placeholder="Titre de L'Annonce"> #}
- 
+              {{form_widget(form.firstTitle ,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce",'minlength' : 8 }})}}
+               <small id="firstTitle" style="color:ligthgrey"></small> 
         </div>
        
         <div class="form-group">
                 <label for="exampleFormControlTextarea1">Contenu<strong style="color:red">*</strong></label>
-                  {{form_widget(form.ContentA ,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce"}})}}
-                   <small id="ContentA" style="color:ligthgrey"></small>
-                {# <textarea class="form-control" id="exampleFormControlTextarea1"  name="ContentA" rows="3" placeholder=" Saisire le Contenu de votre Annonce"></textarea> #}
+                  {{form_widget(form.ContentA ,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce" ,'minlength' : 100 }})}}
+                   <small id="ContentA" style="color:ligthgrey"></small>                
         </div>
 
  <hr class="sidebar-divider">
 
            <div class="form-group">
             <label for="exampleInputEmail1">Deuxieme Sous-titre</label>
-              {{form_widget(form.secondTitle ,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce"}})}}
+              {{form_widget(form.secondTitle ,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce" ,'minlength' : 8 }})}}
                <small id="secondTitle" style="color:ligthgrey"></small>
-            {# <input type="text" class="form-control" id="exampleInputEmail1"  name="second_title" aria-describedby="emailHelp" placeholder="Titre de L'Annonce"> #}
- 
         </div>
        
         <div class="form-group">
                 <label for="exampleFormControlTextarea1">Contenu</label>
-                  {{form_widget(form.ContentB ,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce"}})}}
-                   <small id="ContentB" style="color:ligthgrey"></small>
-                {# <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  name="ContentB" placeholder=" Saisire le Contenu de votre Annonce"></textarea> #}
+                  {{form_widget(form.ContentB ,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce" ,'minlength' : 100 }})}}
+                   <small id="ContentB" style="color:ligthgrey"></small>                
         </div>
 
  <hr class="sidebar-divider">
 
            <div class="form-group">
             <label for="exampleInputEmail1">Troisieme Sous-titre</label>
-            {{form_widget(form.thirtTitle ,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce"}})}}
-            <small id="thirtTitle" style="color:ligthgrey"></small>
-            {# <input type="text" class="form-control" id="exampleInputEmail1"  name="thirt_title" aria-describedby="emailHelp" placeholder="Titre de L'Annonce">#}
+            {{form_widget(form.thirtTitle ,{"attr": {"class":"form-control","placeholder":"Titre de L'Annonce",'minlength' : 8 }})}}
+            <small id="thirtTitle" style="color:ligthgrey"></small>            
         </div>
        
         <div class="form-group">
                 <label for="exampleFormControlTextarea1">Contenu</label>
-                  {{form_widget(form.ContentC ,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce"}})}}
-                   <small id="ContentC" style="color:ligthgrey"></small>
-                {# <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  name="ContentC" placeholder=" Saisire le Contenu de votre Annonce"></textarea> #}
+                  {{form_widget(form.ContentC ,{"attr": {"class":"form-control","placeholder":" Saisire le resumer de votre Annonce" ,'minlength' : 100 }})}}
+                   <small id="ContentC" style="color:ligthgrey"></small>              
         </div>
            {{form_widget(form.Poster ,{"attr": {"style":"width:100%","class":"btn btn-primary"}})}}
-        {# <button type="submit" class="btn btn-primary" style="width:100%">Submit</button> #}
-
+         
    {{form_end(form)}}
 
  </div>

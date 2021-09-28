@@ -237,32 +237,36 @@ $(()=>{
 
     // acceptation de la soumission du formulaire d'annomce
 
-  setInterval(() => {
-
-        if (
-             verifTitle == true && verifcategory == true && 
-             verifResumer == true && verifFirstTitle == true &&
-             verifContentA == true ) {
+    
+    
    
-            
-                $('#form_Poster').attr('type','submit');
-                $('#form_Poster').css('background','#0d6efd');
-                $('#form_Poster').css('border-color','#0d6efd');
 
-            
+
                
-          
-        }else{
+    setInterval(() => {
 
-            $('#form_Poster').attr('type','button');
-            $('#form_Poster').css('background','LightGray');
-            $('#form_Poster').css('border-color','LightGray');
+      if (
+         verifTitle == true && verifcategory == true && 
+         verifResumer == true && verifFirstTitle == true &&
+         verifContentA == true ) {
 
-        }
-        
-    }, 500);
+         
+            $('#form_Poster').attr('type','submit');
+            $('#form_Poster').css('background','#0d6efd');
+            $('#form_Poster').css('border-color','#0d6efd');
 
+         
+            
+      
+      }else{
 
+         $('#form_Poster').attr('type','button');
+         $('#form_Poster').css('background','LightGray');
+         $('#form_Poster').css('border-color','LightGray');
+
+      }
+      
+   }, 500);
 
 
 
