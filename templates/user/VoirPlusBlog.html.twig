@@ -1,13 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}En savoir Plus sur L'article{% endblock %}
 
 {% block body %}
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 
 
 <main id="main">
+ 
 
+
+<div class="modal" tabindex="-1" id='commentaire'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Commentaires</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="commentaire" aria-label="Close"></button>
+      </div>
+      <form>
+      <div class="modal-body">
+         <input type='email' id='email' class="form-control" placeholder="Enter votre E_mail..."><br>
+         <textarea class="form-control" placeholder="Enter votre commentaire..." id="commentairesContent" rows="3"></textarea>
+         <span id="notifCommentaire"></span>
+      </div>
+      <div class="modal-footer">
+        <input type="button" id="submit" class="btn btn-priary" value="Commentez l'Article" style='background-color:dodgerblue;color:white'>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 
  
 
@@ -58,7 +81,13 @@
 
           <div class="entry-meta">
             <ul>
-              <li class="d-flex align-items-center" id="aimer{{item.id}}"><i class="bi bi-text-indent-left" ><span >CATEGORIE:({{item.category}})</span></i> </li>   
+              <li class="d-flex align-items-center"><i class="bi bi-text-indent-left" ><span >CATEGORIE:({{item.category}})</span></i> </li>   
+            </ul>
+            <ul style="margin-top:2em">
+              <li class="d-flex align-items-center" id="aimer"><i class="bi bi-hand-thumbs-up" id='A1'><span id="number_like">0</span></i> </li>
+              <li class="d-flex align-items-center" id='detester'> <i class="bi bi-hand-thumbs-down" id='A2'><span id="number_unlike">0</span></i></li>
+              <li class="d-flex align-items-center" ><i class="bi bi-clock"></i>jan 2012</li>
+              <input type="hidden" id="Annonce" value="{{item.id}}">
             </ul>
           </div>
 
@@ -67,14 +96,21 @@
          
         <h6>{{item.firsttitle}}</h6>
         <p>{{item.contenta}}</p>
-
-<hr>
+{% if item.secondtitle != null %}
+   <hr>
         <h6>{{item.secondtitle}}</h6>
         <p>{{item.contentb}}</p>
+
+{% endif %}
+
+
+{% if item.thirttitle != null %}
 
 <hr>
         <h6>{{item.thirttitle}}</h6>
         <p>{{item.contentc}}</p>
+
+{% endif %}
         </article> 
 
 
@@ -87,7 +123,7 @@
 
   <div class="entry-meta">
         <ul>
-          <li class="d-flex align-items-center" ><i class="bi bi-chat-dots" ><span > {{nombre}} COMMENTAIRES</span></i> </li>    
+          <li class="d-flex align-items-center" ><i class="bi bi-chat-dots"  data-toggle ="modal" data-target ="#commentaire"  ><span > {{nombre}} COMMENTAIRES</span></i> </li>    
         </ul>
   </div>
 
@@ -106,11 +142,11 @@
        
        
 
-      </div><!-- End blog entries list -->
+      </div> 
 
  
 
-      </div><!-- End blog sidebar -->
+      </div> 
 
     </div>
 
@@ -125,11 +161,220 @@
 </main>
 
 
+
+<input type="hidden" id="path_like" value="{{path('like_annonce')}}">
+<input type="hidden" id="path_dislike" value="{{path('dislike_annonce')}}">
+<input type="hidden" id="path_commentaireAnnonce" value="{{path('commentaire')}}">
+<input type="hidden" id="path_loadlike" value="{{path('loadlike')}}">
+<input type="hidden" id="path_loadunlike" value="{{path('loadunlike')}}">
+<input type="hidden" id="path_loadComment" value="{{path('load_number_Commentaire')}}">
+
+<script>
+{# fonction de recuperation des likes d'une annonce #}
+
+$(()=>{
+  var loadlike = setInterval(function(){
+
+
+    var path = $('#path_loadlike').val();
+    var annonce = $('#Annonce').val();
+  
+      $.ajax({
+      url:path,
+      method:"post",
+      data:{
+       id:annonce,
+      },success:function(e){
+         $("#number_like").html(e);
+      },error:function(e){  
+      }
+    }); 
+
+    clearInterval(loadlike);
+  },1000)
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+{# fonction de recuperation des unlikes d'une annonce #}
+
+$(()=>{
+  var unloadlike = setInterval(function(){
+
+
+    var path = $('#path_loadunlike').val();
+    var annonce = $('#Annonce').val();
+  
+      $.ajax({
+      url:path,
+      method:"post",
+      data:{
+       id:annonce,
+      },success:function(e){
+         $("#number_unlike").html(e);
+      },error:function(e){  
+      }
+    }); 
+
+    clearInterval(unloadlike);
+  },1500)
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+<script>
+{# fonction de recuperation des unlikes d'une annonce #}
+
+$(()=>{
+  var loadComments = setInterval(function(){
+
+
+    var path = $('#path_loadComment').val();
+    var annonce = $('#Annonce').val();
+  
+      $.ajax({
+      url:path,
+      method:"post",
+      data:{
+       id:annonce,
+      },success:function(e){
+         $("#numberComent").html(e);
+      },error:function(e){  
+      }
+    }); 
+
+    clearInterval(loadComments);
+  },2000)
+
+
+});
+
+
+</script>
+
+
+ 
+
+
+
+
+
+{# recuperation des commentaire #}
+
+ 
+
+<script>
+ {# synteme de like et d'unlike  d'une annonce #}
+
+$(()=>{
+  
+
+ var like = false;
+
+ var unlike = false;
+ 
+
+
+  $('#aimer').on('click',function(){
+
+    var path=$('#path_like').val();
+    var annonce = $('#Annonce').val();
+    
+ if(like == false && unlike == false){
+
+    if( like == false){
+    $.ajax({
+      url:path,
+      method:"post",
+      data:{
+        annonce:annonce,
+      },success:function(e){
+        $('#number_like').html(e);
+        $('#A1').css("color","dodgerblue");
+      },error:function(e){
+
+      }
+    });
+  like = true;
+
+    }
+ }
+  });
+
+ 
+ 
+
+  
+
+
+
+  $('#detester').on('click',function(){
+    
+    var path=$('#path_dislike').val();
+    var annonce = $('#Annonce').val();
+  
+if(unlike == false && like == false){
+
+    if(unlike == false){
+
+    $.ajax({
+      url:path,
+      method:"post",
+      data:{
+        annonce:annonce,
+      },success:function(e){
+
+        $('#number_unlike').html(e);
+        $('#A2').css("color","dodgerblue");
+
+      },error:function(e){
+
+      
+    }
+    });
+    unlike = true;
+
+    }
+
+    }
+
+  });
+
+
+});
+
+
+
+
+</script>
+
 <!-- End #main -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src='/assets/js/jquery-3.6.0.min.js'></script>
-
+<script src="{{asset('assets/js/modalverification.js')}}"></script>
 
 
 

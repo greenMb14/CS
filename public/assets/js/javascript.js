@@ -52,7 +52,7 @@ $("#email").on("blur",function(){
 
     }else{
 
-     $("#email").css("bordercolor:red");
+     $("#email").css("border-color","red");
     }
    
 }); 

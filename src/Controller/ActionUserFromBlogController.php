@@ -155,18 +155,9 @@ class ActionUserFromBlogController extends AbstractController
          $em->persist($comment);
          $em->flush();
 
-        //  recuperation du nombre de commentaire
-
-        $nombreCommentaires = $this->getDoctrine()->getRepository(Commentaires::class)->findAll();
-        for ($i=0; $i <count($nombreCommentaires) ; $i++) { 
-            
-            if ($nombreCommentaires[$i]->getIdAnnonce() == $idAnnonce) {
-                 
-                $nombre[] = $nombreCommentaires[$i]->getIdAnnonce();
-            }
-        }
+        //  envoi du message de confirmation 
     
-         return new Response(count($nombre)." "."Commentaires");
+         return new Response("votre commentaire a bien ete envoye");
 
      }
 

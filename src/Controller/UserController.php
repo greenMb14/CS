@@ -177,7 +177,7 @@ class UserController extends AbstractController
     public function bloc(): Response
     {
  
-        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(array(),array('id' => 'DESC'),2); 
+        $annonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(array(),array('id' => 'DESC'),7); 
 
         $AllAnnonce = $this->getDoctrine()->getRepository(Annonce::class)->findBy(array(),array('id' => 'DESC')); 
 

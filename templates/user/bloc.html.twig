@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block body %}
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
@@ -23,7 +23,7 @@
       </div>
       <form>
       <div class="modal-body">
-         <input type='text' id='email{{item.id}}' class="form-control" placeholder="Enter votre E_mail..."><br>
+         <input type='email' id='email{{item.id}}' class="form-control" placeholder="Enter votre E_mail..."><br>
          <textarea class="form-control" placeholder="Enter votre commentaire..." id="commentairesContent{{item.id}}" rows="3"></textarea>
       </div>
       <div class="modal-footer">
@@ -223,10 +223,7 @@ $(()=>{
 {# sytheme d'envoie de commentaire sur une annonce #}
 $(()=>{
 
-  $('#submit{{item.id}}').on('click',function(){
-
-    $('#commentairesContent{{item.id}}').val(null);
-    $('#email{{item.id}}').val(null);
+  $('#submit{{item.id}}').on('click',function(){ 
  
     var path = $('#path_commentaireAnnonce').val();
     var annonce = {{item.id}};
@@ -243,7 +240,8 @@ $(()=>{
       }
     }); 
 
-   
+    $('#commentairesContent{{item.id}}').val(null);
+    $('#email{{item.id}}').val(null);
     
   });
 
@@ -340,15 +338,18 @@ if(unlike == false && like == false){
        
        
        
-        <div class="blog-pagination">
-          <ul class="justify-content-center">
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-          </ul>
-        </div>
 
-      </div><!-- End blog entries list -->
+      </div> 
+
+
+
+
+
+
+
+
+
+
 
       <div class="col-lg-4">
 
@@ -424,8 +425,8 @@ if(unlike == false && like == false){
 <!-- End #main -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src='/assets/js/jquery-3.6.0.min.js'></script>
-
+<script src="{{asset('/assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/modalverification.js')}}"></script>
 
 
 
