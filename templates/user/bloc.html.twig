@@ -3,12 +3,11 @@
 {% block title %}Blog{% endblock %}
 
 {% block body %}
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-
+ 
 
 <main id="main">
 
-
+ 
 
   {# blog pour modale boostrap et autre #}
 {% for item in data %}
@@ -25,6 +24,7 @@
       <div class="modal-body">
          <input type='email' id='email{{item.id}}' class="form-control" placeholder="Enter votre E_mail..."><br>
          <textarea class="form-control" placeholder="Enter votre commentaire..." id="commentairesContent{{item.id}}" rows="3"></textarea>
+         <span id="notifCommentaire{{item.id}}"></span>
       </div>
       <div class="modal-footer">
         
@@ -57,9 +57,6 @@
 <!-- ======= Blog Section ======= -->
 <section id="blog" class="blog">
 
-{% for item in data %}
-  
-
 
 
   <div class="container" data-aos="fade-up">
@@ -67,6 +64,9 @@
     <div class="row">
 
       <div class="col-lg-8 entries">
+
+{% for item in data %}
+  
 
         <article class="entry">
 
@@ -218,37 +218,7 @@ $(()=>{
 
 {# recuperation des commentaire #}
 
-<script>
-
-{# sytheme d'envoie de commentaire sur une annonce #}
-$(()=>{
-
-  $('#submit{{item.id}}').on('click',function(){ 
  
-    var path = $('#path_commentaireAnnonce').val();
-    var annonce = {{item.id}};
-     $.ajax({
-      url:path,
-      method:"post",
-      data:{
-      commentaire:$('#commentairesContent{{item.id}}').val(),
-       email:$('#email{{item.id}}').val(),
-       id:annonce,
-      },success:function(e){
-        
-      },error:function(e){  
-      }
-    }); 
-
-    $('#commentairesContent{{item.id}}').val(null);
-    $('#email{{item.id}}').val(null);
-    
-  });
-
-});
-
-
-</script>
 
 <script>
  {# synteme de like et d'unlike  d'une annonce #}
@@ -331,7 +301,141 @@ if(unlike == false && like == false){
 
 
 
+</script>
 
+
+
+
+
+
+
+
+
+{# verifcation de la modal et envoie du commentaire #}
+
+<script>
+
+
+$(()=>{
+  
+var verifEmail  = false;
+var verifCommentaire  = false;
+
+  $("#email{{item.id}}").on("blur",function(){
+
+    if (/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/.test($("#email{{item.id}}").val())) {
+        
+        $("#notifCommentaire{{item.id}}").html(""); 
+        $("#email{{item.id}}").css("border-color","#36b9cc");
+        verifEmail  = true;
+    
+        }else{
+    
+         $("#email{{item.id}}").css("border-color","red");
+         $("#notifCommentaire{{item.id}}").html("votre adresse email est incorect"); 
+         $("#notifCommentaire{{item.id}}").css("color","red");
+         verifEmail  = false;
+        }
+       
+
+  });
+
+
+
+  $("#commentairesContent{{item.id}}").on("blur",function(){
+
+    if (/[a-zA-Z0-9]/.test($("#commentairesContent{{item.id}}").val())) {
+        
+        $("#notifCommentaire{{item.id}}").html(""); 
+        $("#commentairesContent{{item.id}}").css("border-color","#36b9cc");
+        verifCommentaire = true;
+    
+        }else{
+    
+         $("#commentairesContent{{item.id}}").css("border-color","red");
+         $("#notifCommentaire{{item.id}}").html("votre commentaire ne doit pas comprendre de caractere speciaux"); 
+         $("#notifCommentaire{{item.id}}").css("color","red");
+         verifCommentaire  = false;
+        }
+       
+
+  });
+
+var validation  = false;
+
+
+ setInterval(() => {
+
+    if ( verifCommentaire  == true && verifEmail  == true) {
+
+        $("#submit{{item.id}}").css('background','#0d6efd');
+        validation  = true;
+         
+     
+    }else{  
+            
+        $("#submit{{item.id}}").css("background","LightGray"); 
+        validation  = false;
+    }
+      
+  }, 1000);
+
+
+
+
+
+
+  
+  $('#submit{{item.id}}').on('click',function(){ 
+
+    if (validation  == true) {
+       
+    $("#notifCommentaire{{item.id}}").html("");
+    var path = $('#path_commentaireAnnonce').val();
+    var annonce = {{item.id}};
+ 
+        if($('#commentairesContent{{item.id}}').val() != "" &&  $('#email{{item.id}}').val() != ""){
+
+          $.ajax({
+              url:path,
+              method:"post",
+              data:{
+              commentaire:$('#commentairesContent{{item.id}}').val(),
+              email:$('#email{{item.id}}').val(),
+              id:annonce,
+              },success:function(e){
+
+                $("#notifCommentaire{{item.id}}").html(e);
+                $("#notifCommentaire{{item.id}}").css("color","green");
+                  
+                verifEmail  = false;
+                verifCommentaire  = false;
+                validation  = false;
+                
+              },error:function(e){ 
+
+                $("#notifCommentaire{{item.id}}").html("desoler une erreur c'est produit, veuillez reessaiyez");
+                $("#notifCommentaire{{item.id}}").css("color","green"); 
+
+                verifEmail  = false;
+                verifCommentaire  = false;
+                validation  = false;
+              }
+      
+          }); 
+
+        }
+
+    $('#commentairesContent{{item.id}}').val(null);
+    $('#email{{item.id}}').val(null);
+
+        
+    }
+    
+    
+  });
+
+});
 </script>
 
   {% endfor %} 
@@ -426,7 +530,7 @@ if(unlike == false && like == false){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{asset('/assets/js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('assets/js/modalverification.js')}}"></script>
+ 
 
 
 

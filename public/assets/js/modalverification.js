@@ -55,7 +55,7 @@ var validation = false;
          
      
     }else{  
-              
+
         $("#submit").css("background","LightGray"); 
         validation = false;
     }
@@ -75,25 +75,34 @@ var validation = false;
     $("#notifCommentaire").html("");
     var path = $('#path_commentaireAnnonce').val();
     var annonce = $('#Annonce').val();
-     $.ajax({
-      url:path,
-      method:"post",
-      data:{
-      commentaire:$('#commentairesContent').val(),
-       email:$('#email').val(),
-       id:annonce,
-      },success:function(e){
 
-        $("#notifCommentaire").html(e);
-         $("#notifCommentaire").css("color","green");
+          if ( $('#commentairesContent').val(null) != null &&  $('#email').val() != null) {
+           
+            
+            $.ajax({
+              url:path,
+              method:"post",
+              data:{
+              commentaire:$('#commentairesContent').val(),
+               email:$('#email').val(),
+               id:annonce,
+              },success:function(e){
         
-      },error:function(e){  
-      }
-    }); 
+                $("#notifCommentaire").html(e);
+                 $("#notifCommentaire").css("color","green");
+                
+              },error:function(e){  
 
-    $('#commentairesContent').val(null);
-    $('#email').val(null);
+                $("#notifCommentaire").html("desoler une erreur c'est produit, veuillez reessaiyez");
+                 $("#notifCommentaire").css("color","red");
+              }
+            }); 
+        
+            $('#commentairesContent').val(null);
+            $('#email').val(null);
 
+          }
+    
         
     }
     

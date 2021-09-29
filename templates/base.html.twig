@@ -12,6 +12,7 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
+           
             <link href="{{ asset('assets/img/unnamed.jpg')}}" rel="icon">
             <link href="{{asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
             <!-- Google Fonts -->
@@ -71,10 +72,9 @@
 
           
           <li><a href="{{path('porfolio')}}">Portfolio</a></li>
-          <li><a href="">Write Blog</a></li>
           <li><a href="{{path('bloc')}}">Blog</a></li>
           <li><a href="{{path('contact')}}">Contact</a></li>
-
+           <li><a href="{{path('redirection')}}">Log in</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -84,7 +84,7 @@
         <a href="https://ke.linkedin.com/company/cs-communications " class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
 
-        <a href="{{path('redirection')}}" ><i class="fa fa-user" aria-hidden="true"></i>Login</a>
+        
     </div>
     
   </header>
