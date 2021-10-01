@@ -70,7 +70,10 @@ class UserController extends AbstractController
     public function Testimony(): Response
     {
         return $this->render('user/testimony.html.twig');   
+
     }
+
+    
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -245,29 +248,7 @@ class UserController extends AbstractController
 
 
 
-    /**
-     * ce controlleur est dedier a l inscription du user par l administrateur
-     */
-
-    #[Route('/Add', name: 'Add')]
-    public function Add(Request $request,EntityManagerInterface $em): Response
-    {
-        $data=$request->request->all();
-        $user=new User();
-        $verificationWord=$data['Cpassword'];
-        $word=$data['password'];
-        if($verificationWord ==$word){
-        $user->setUsername($data['name']);
-        $user->setPassword($this->passwordEncode->encodePassword($user,$data['password']));
-        $user->setRoles(['ROLE_USER']);
-        $em->persist($user);
-        $em->flush();
-             return new Response('yes daniel tu l a faire');
-        } else
-        {
-            return new Response('non daniel qu a tu faire');
-        } 
-    }
+ 
 
 
 

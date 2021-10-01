@@ -2,12 +2,7 @@ $(()=>{
  
 
     // declaration des variable de verification
-
-    var verifTitle = false;
-    var  verifcategory = false;
-    var verifResumer = false;
-    var  verifFirstTitle = false;
-    var  verifContentA = false;
+ 
     $('#annonce_title').val(null);
     $('#annonce_category').val(null);
     $('#annonce_resumer').val(null); 
@@ -25,17 +20,17 @@ $(()=>{
          if (/[A-Z]/.test(titre) && titre.length > 8){
             $('#annonce_title').css('border-color','#36b9cc');
             $('#titre').html("");
-            verifTitle = true;
+ 
          }else if(titre.length <= 8){
             $('#annonce_title').css('border-color','red');
             $('#titre').html('votre champs doit contenir au moins 9 caracteres');
             $('#titre').css('color','red');
-            verifTitle = false;
+ 
          }else{
             $('#annonce_title').css('border-color','red');
             $('#titre').html('votre titre doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#titre').css('color','red');
-            verifTitle = false;
+ 
          }
     })
 
@@ -48,17 +43,17 @@ $(()=>{
          if (/[A-Z]/.test(category) && category.length > 8){
             $('#annonce_category').css('border-color','#36b9cc');
             $('#category').html('');
-            verifcategory = true;
+ 
          }else if(category.length <= 8){
             $('#annonce_category').css('border-color','red');
             $('#category').html('votre champs doit contenir au moins 9 caracteres');
             $('#category').css('color','red');
-            verifcategory = false;
+ 
          }else{
             $('#annonce_category').css('border-color','red');
             $('#category').html('votre categorie doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#category').css('color','red');
-            verifcategory = false;
+ 
          }
     })
 
@@ -73,17 +68,17 @@ $(()=>{
          if (/[a-zA-Z0-9]/.test(resumer) && resumer.length > 99){
             $('#annonce_resumer').css('border-color','#36b9cc');
             $('#resumer').html('');
-            verifResumer = true;
+ 
          }else if(resumer.length <= 99){
             $('#annonce_resumer').css('border-color','red');
             $('#resumer').html('votre champs doit contenir au moins 100 caracteres');
             $('#resumer').css('color','red');
-            verifResumer = false;
+ 
          }else{
             $('#annonce_resumer').css('border-color','red');
             $('#resumer').html('votre resumer ne doit pas comprendre de caracteres speciaux');
             $('#resumer').css('color','red');
-            verifResumer = false;
+ 
          }
     })
 
@@ -99,17 +94,17 @@ $(()=>{
          if (/[A-Z]/.test(firstTitle) && firstTitle.length > 8){
             $('#annonce_firstTitle').css('border-color','#36b9cc');
             $('#firstTitle').html('');
-            verifFirstTitle = true;
+ 
          }else if(firstTitle.length <= 8){
             $('#annonce_firstTitle').css('border-color','red');
             $('#firstTitle').html('votre champs doit contenir au moins 9 caracteres');
             $('#firstTitle').css('color','red');
-            verifFirstTitle = false;
+ 
          }else{
             $('#annonce_firstTitle').css('border-color','red');
             $('#firstTitle').html('votre titre doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#firstTitle').css('color','red');
-            verifFirstTitle = false;
+  
          }
     })
 
@@ -124,17 +119,17 @@ $(()=>{
          if (/[a-zA-Z0-9]/.test(ContentA) && ContentA.length > 99){
             $('#annonce_ContentA').css('border-color','#36b9cc');
             $('#ContentA').html('');
-            verifContentA = true;
+    
          }else if(ContentA.length <= 99){
             $('#annonce_ContentA').css('border-color','red');
             $('#ContentA').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentA').css('color','red');
-            verifContentA = false;
+     
          }else{
             $('#annonce_ContentA').css('border-color','red');
             $('#ContentA').html('votre Contenu ne doit pas comprendre de caracteres speciaux');
             $('#ContentA').css('color','red');
-            verifContentA = false;
+       
          }
     })
 
@@ -247,9 +242,11 @@ $(()=>{
 
  setInterval(() => {
   if (
-         verifTitle == true && verifcategory == true && 
-         verifResumer == true && verifFirstTitle == true &&
-         verifContentA == true ) {
+   /[A-Z]/.test($('#annonce_title').val())  &&  $('#annonce_title').val().length > 8 && 
+   /[A-Z]/.test($('#annonce_category').val())  &&  $('#annonce_category').val().length > 8 && 
+   /[a-zA-Z0-9]/.test($('#annonce_resumer').val()) && $('#annonce_resumer').val().length > 100 &&
+   /[A-Z]/.test($('#annonce_firstTitle').val()) && $('#annonce_firstTitle').val().length > 8 &&
+   /[a-zA-Z0-9]/.test($('#annonce_ContentA').val()) && $('#annonce_ContentA').val().length > 100) {
          
             $('#annonce_Poster').attr('type','submit');
             $('#annonce_Poster').css('background','#0d6efd');

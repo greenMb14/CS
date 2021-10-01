@@ -62,7 +62,7 @@ class MessageController extends AbstractController
 
     $UpdateNumber++;
 
-    if ($UpdateNumber > 1) {
+    if ($UpdateNumber >= 1) {
 
         $valeur->setNombre($UpdateNumber);
 

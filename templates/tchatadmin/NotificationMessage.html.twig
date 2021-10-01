@@ -1,28 +1,32 @@
  
  {% for item in compt %}
-   <div id= "A{{item.id}}">
-      <img src="/assets/img/icon.jpg" id="img"><span id="number">{{item.nombre}}</span>
-   </div>
-   <script>
- $(document).ready(function(){
-  
-    $('#A{{item.id}}').on('click',function(){
-           var email = '{{item.email}}' ;
-           var path = $('#pathloadmessage').val();
-           
-           $.ajax({
-               method:'post',
-               url:path,
-               data:{
-                   email:email,
-               },success:function(e){
-                   $('#articletchat').html(e);
-               }
-           });
-       });
- 
-   });
-   </script>
+     
+     {% if item.nombre != 0 %}
+     
+            <div id= "A{{item.id}}">
+                <img src="/assets/img/icon.jpg" id="img"><span id="number">{{item.nombre}}</span>
+            </div>
+            <script>
+            $(document).ready(function(){
+            
+                $('#A{{item.id}}').on('click',function(){
+                    var email = '{{item.email}}' ;
+                    var path = $('#pathloadmessage').val();
+                    
+                    $.ajax({
+                        method:'post',
+                        url:path,
+                        data:{
+                            email:email,
+                        },success:function(e){
+                            $('#articletchat').html(e);
+                        }
+                    });
+                });
+            
+            });
+            </script>
+     {% endif %}
   
 {% endfor %}
 

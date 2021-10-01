@@ -1,0 +1,69 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Administrator{% endblock %}
+
+{% block body %}
+
+
+ <div class="row mt-5 justify-content-center" data-aos="fade-up">
+          <div class="col-lg-10">
+
+      
+   	   {% for message in app.flashes('notfound') %}
+          <div class="alert alert-danger" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
+
+
+        
+   	   {% for message in app.flashes('Success') %}
+          <div class="alert alert-success" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
+
+ 
+  
+            
+     <div class="row">
+            {% for value in data %}
+
+                 <div class="col-xl-4 col-lg-4">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                               
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                 
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h4 style="color:#37517e;margin-left:2em;padding-top:0.5em">Username:{{value.username}}</h4> 
+                                    </div>
+                                      
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                           <a  href="{{path('getUpdate_Personnel',{'id':value.id})}}">
+                                            <i class="fa fa-pencil" aria-hidden="true"  style="color:orange;font-size:20px;"></i>
+                                          </a>
+                                        </span>
+                                        <span class="mr-2">
+                                        <a  href="{{path('Delete_Personnel',{'id':value.id})}}">
+                                           <i class="fa fa-trash-o" style="color:red;font-size:20px;margin-left:5em"></i>
+                                         </a>
+                                        </span>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+ 
+            {% endfor %}
+ 
+        </div>
+        </div>
+        </div>
+       
+ 
+ {% endblock %}

@@ -3,11 +3,7 @@ $(()=>{
   
     // declaration des variable de verification
 
-    var verifTitle = false;
-    var  verifcategory = false;
-    var verifResumer = false;
-    var  verifFirstTitle = false;
-    var  verifContentA = false;
+   
      
  
     // verfication du champ de saisie du titre
@@ -17,17 +13,17 @@ $(()=>{
          if (/[A-Z]/.test(titre) && titre.length > 8){
             $('#form_title').css('border-color','#36b9cc');
             $('#titre').html("");
-            verifTitle = true;
+       
          }else if(titre.length <= 8){
             $('#form_title').css('border-color','red');
             $('#titre').html('votre champs doit contenir au moins 9 caracteres');
             $('#titre').css('color','red');
-            verifTitle = false;
+ 
          }else{
             $('#form_title').css('border-color','red');
             $('#titre').html('votre titre doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#titre').css('color','red');
-            verifTitle = false;
+ 
          }
     })
 
@@ -40,17 +36,17 @@ $(()=>{
          if (/[A-Z]/.test(category) && category.length > 8){
             $('#form_category').css('border-color','#36b9cc');
             $('#category').html('');
-            verifcategory = true;
+     
          }else if(category.length <= 8){
             $('#form_category').css('border-color','red');
             $('#category').html('votre champs doit contenir au moins 9 caracteres');
             $('#category').css('color','red');
-            verifcategory = false;
+         
          }else{
             $('#form_category').css('border-color','red');
             $('#category').html('votre categorie doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#category').css('color','red');
-            verifcategory = false;
+         
          }
     })
 
@@ -65,17 +61,17 @@ $(()=>{
          if (/[a-zA-Z0-9]/.test(resumer) && resumer.length > 100){
             $('#form_resumer').css('border-color','#36b9cc');
             $('#resumer').html('');
-            verifResumer = true;
+         
          }else if(resumer.length <= 99){
             $('#form_resumer').css('border-color','red');
             $('#resumer').html('votre champs doit contenir au moins 100 caracteres');
             $('#resumer').css('color','red');
-            verifResumer = false;
+        
          }else{
             $('#form_resumer').css('border-color','red');
             $('#resumer').html('votre resumer ne doit pas comprendre de caracteres speciaux');
             $('#resumer').css('color','red');
-            verifResumer = false;
+       
          }
     })
 
@@ -91,17 +87,17 @@ $(()=>{
          if (/[A-Z]/.test(firstTitle) && firstTitle.length > 8){
             $('#form_firstTitle').css('border-color','#36b9cc');
             $('#firstTitle').html('');
-            verifFirstTitle = true;
+    
          }else if(firstTitle.length <= 8){
             $('#form_firstTitle').css('border-color','red');
             $('#firstTitle').html('votre champs doit contenir au moins 9 caracteres');
             $('#firstTitle').css('color','red');
-            verifFirstTitle = false;
+ 
          }else{
             $('#form_firstTitle').css('border-color','red');
             $('#firstTitle').html('votre titre doit etre en majuscule et ne doit pas comprendre des chiffires ou autre caracteres speciaux');
             $('#firstTitle').css('color','red');
-            verifFirstTitle = false;
+      
          }
     })
 
@@ -116,17 +112,17 @@ $(()=>{
          if (/[a-zA-Z0-9]/.test(ContentA) &&  ContentA.length > 100){
             $('#form_ContentA').css('border-color','#36b9cc');
             $('#ContentA').html('');
-            verifContentA = true;
+    
          }else if(ContentA.length <= 99){
             $('#form_ContentA').css('border-color','red');
             $('#ContentA').html('votre champs doit contenir au moins 100 caracteres');
             $('#ContentA').css('color','red');
-            verifContentA = false;
+ 
          }else{
             $('#form_ContentA').css('border-color','red');
             $('#ContentA').html('votre Contenu ne doit pas comprendre de caracteres speciaux');
             $('#ContentA').css('color','red');
-            verifContentA = false;
+ 
          }
     })
 
@@ -246,9 +242,12 @@ $(()=>{
     setInterval(() => {
 
       if (
-         verifTitle == true && verifcategory == true && 
-         verifResumer == true && verifFirstTitle == true &&
-         verifContentA == true ) {
+         /[A-Z]/.test($('#form_title').val())  &&  $('#form_title').val().length > 8 && 
+         /[A-Z]/.test($('#form_category').val())  &&  $('#form_category').val().length > 8 && 
+         /[a-zA-Z0-9]/.test($('#form_resumer').val()) && $('#form_resumer').val().length > 100 &&
+         /[A-Z]/.test($('#form_firstTitle').val()) && $('#form_firstTitle').val().length > 8 &&
+         /[a-zA-Z0-9]/.test($('#form_ContentA').val()) && $('#form_ContentA').val().length > 100
+         ) {
 
          
             $('#form_Poster').attr('type','submit');
@@ -275,144 +274,5 @@ $(()=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   //  verification des champs du formulaire d'inscription d'un utilisateur
-
-
-
-
-
-
-
-
-
-   var verifUsername = false;
-   var verifPassword = false;
-   var verfiComfirmPassword = false;
- 
-
-
-
-       // verfication du champ de saisie du Username
-       $('#form_username').on('blur',function(){
-      
-         var username = $('#form_username').val(); 
-          if (/[a-zA-Z]/.test(username) && username.length > 8 ){
-             $('#form_username').css('border-color','#36b9cc');
-             $('#username').html('');
-             verifUsername = true;
-          }else if(username.length <= 8){
-             $('#form_username').css('border-color','red');
-             $('#username').html('votre champs doit contenir au moins 9 caracteres');
-             $('#username').css('color','red');
-             verifUsername = false;
-          }else{
-             $('#username').css('border-color','red');
-             $('#username').html('votre Pseudo ne doit pas comprendre des chiffires ou autre caracteres speciaux');
-             $('#username').css('color','red');
-             verifUsername = false;
-          }
-     })
-
-
-
-
-
-
-
-
-
-
-
-     
-       // verfication du champ de saisie du Password
-       $('#form_Password').on('blur',function(){
-      
-         var password = $('#form_Password').val(); 
-          if (/[a-zA-Z0-9]/.test(password) && password.length > 8 ){
-             $('#form_Password').css('border-color','#36b9cc');
-             $('#password').html('');
-             verifPassword = true;
-          }else if(password.length <= 8){
-             $('#form_Password').css('border-color','red');
-             $('#password').html('votre champs doit contenir au moins 9 caracteres');
-             $('#password').css('color','red');
-             verifPassword = false;
-          }else{
-             $('#password').css('border-color','red');
-             $('#password').html('votre Mot de pass ne doit pas comprendre des caracteres speciaux');
-             $('#password').css('color','red');
-             verifPassword = false;
-          }
-     })
-
-
-
-
-
-
-    
-
-
-       // verfication du champ de saisie du ComfirmPassword
-       $('#ComfirmPassword').on('blur',function(){
-      
-         var ComfirmPassword = $('#ComfirmPassword').val(); 
-         var pass = $('#form_Password').val(); 
-          if (ComfirmPassword === pass ){
-             $('#ComfirmPassword').css('border-color','#36b9cc');
-             $('#Comfirm').html('');
-             verfiComfirmPassword = true;
-          }else{
-             $('#Comfirm').css('border-color','red');
-             $('#Comfirm').html('Vos mot de pass ne sont pas synchronise');
-             $('#Comfirm').css('color','red');
-             verfiComfirmPassword = false;
-          }
-     })
-     
-
-
-   setInterval(() => {
-
-          if (
-            verfiComfirmPassword == true &&
-            verifPassword == true &&
-            verifUsername == true
-            ) {
-               $('#form_Inscris').attr('type','submit');
-               $('#form_Inscris').css('background','#0d6efd');
-               $('#form_Inscris').css('border-color','#0d6efd');
-            
-             
-          }else{
-
-            $('#form_Inscris').attr('type','button');
-            $('#form_Inscris').css('background','LightGray');
-            $('#form_Inscris').css('border-color','LightGray');
-          }
-        
-     }, 700);
 
 });

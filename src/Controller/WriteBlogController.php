@@ -70,23 +70,92 @@ class WriteBlogController extends AbstractController
                     $file->guessExtension() == "jpg" or 
                     $file->guessExtension() == "jpeg" or
                     $file->guessExtension() == "png"  ) {
- 
-                        $filename = md5(uniqid()).'.'.$file->guessExtension();
-                        $file->move($this->getParameter('upload_destination'),$filename);
 
-                         // enregistrement des element du formulaire
-                        $Annonce->setTitle($title);
-                        $Annonce->setCategory($category);
-                        $Annonce->setFile($filename);
-                        $Annonce->setResumer($resumer);
-                        $Annonce->setFirstTitle($firstTitle);
-                        $Annonce->setContentA($contentA);
-                        $Annonce->setSecondTitle($secondTitle);
-                        $Annonce->setContentB($contentB);
-                        $Annonce->setThirtTitle($thirtTitle);
-                        $Annonce->setContentC($contentC);
-                        $entityManager->persist($Annonce);
-                        $entityManager->flush();
+
+                        if (
+                            strlen(trim($title)) <= 8 or 
+                            strlen(trim($firstTitle)) <= 8 or
+                            strlen(trim($secondTitle)) <= 8 or 
+                            strlen(trim($thirtTitle)) <= 8
+                            ) {
+                            
+                                // nombre de caractere du titre non comforme
+
+                                $this->addFlash(
+                                    'erroTitle',
+                                    "la longueur minimale d'un Titre est de 9 caracteres"
+                                );
+                
+                                 return $this->render('Write_Blog/index.html.twig',['form'=>$form->createView()]); 
+
+
+                        }else{
+
+
+
+                            if (
+                                strlen(trim($resumer)) <= 99 or 
+                                strlen(trim($contentA)) <= 99 or
+                                strlen(trim($contentB)) <= 99 or 
+                                strlen(trim($contentC)) <= 99
+                            ) {
+                               
+                                 // nombre de caractere du contenu non comforme
+
+                                 $this->addFlash(
+                                    'erroContent',
+                                    "la longueur minimale d'un Contenu est de 100 caracteres"
+                                );
+                
+                                 return $this->render('Write_Blog/index.html.twig',['form'=>$form->createView()]); 
+
+
+                            }else{
+
+
+                                if (strlen(trim($category)) <= 8) {
+                                    
+                                     // nombre de caractere de la categorie non comforme
+
+                                 $this->addFlash(
+                                    'erroCategory',
+                                    "la longueur minimale d'une categorie est de 9 caracteres"
+                                );
+                
+                                 return $this->render('Write_Blog/index.html.twig',['form'=>$form->createView()]);
+
+
+                                }else{
+
+                                    $filename = md5(uniqid()).'.'.$file->guessExtension();
+                                    $file->move($this->getParameter('upload_destination'),$filename);
+            
+                                     // enregistrement des element du formulaire
+                                    $Annonce->setTitle($title);
+                                    $Annonce->setCategory($category);
+                                    $Annonce->setFile($filename);
+                                    $Annonce->setResumer($resumer);
+                                    $Annonce->setFirstTitle($firstTitle);
+                                    $Annonce->setContentA($contentA);
+                                    $Annonce->setSecondTitle($secondTitle);
+                                    $Annonce->setContentB($contentB);
+                                    $Annonce->setThirtTitle($thirtTitle);
+                                    $Annonce->setContentC($contentC);
+                                    $entityManager->persist($Annonce);
+                                    $entityManager->flush();
+        
+
+                                }
+
+                              
+
+
+                            }
+
+                        
+                        }
+ 
+                      
                   
                 }else{
 
@@ -243,6 +312,7 @@ public function DeleteBlog($id)
    
         $entityManager = $this->getDoctrine()->getManager();
         $Annonce =  $this->getDoctrine()->getRepository(Annonce::class)->find($id);
+        $image =  $this->getDoctrine()->getRepository(Annonce::class)->findBy(["id"=>$id]);
 
         if (!$Annonce) {
             
@@ -278,8 +348,8 @@ public function DeleteBlog($id)
             'errorSaisie',
             'veuillez remplir correctement les champs '
            );
-        //    dd($Annonce);
-           return $this->render('Write_Blog/UpdateBlog.html.twig',["form"=>$form->createView(),"img"=>$Annonce,]);
+    
+           return $this->render('Write_Blog/UpdateBlog.html.twig',["form"=>$form->createView(),"img"=>$image,]);
        
             
         }

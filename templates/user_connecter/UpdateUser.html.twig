@@ -17,62 +17,57 @@
          <div class="container-fluid">
 
     
-   	   {% for message in app.flashes('errorB') %}
+   	   {% for message in app.flashes('errorlength') %}
           <div class="alert alert-danger" role="alert">
              {{message}}
           </div>
         {% endfor %}
 
-
-        
-   	   {% for message in app.flashes('errorC') %}
-          <div class="alert alert-danger" role="alert">
-             {{message}}
-          </div>
-        {% endfor %}
  
-        {% for message in app.flashes('error') %}
+        {% for message in app.flashes('errorlengthB') %}
           <div class="alert alert-danger" role="alert">
             {{message}}
           </div>
         {% endfor %}
        
     
-         {% for message in app.flashes('Success') %}
-          <div class="alert alert-success" role="alert">
+         {% for message in app.flashes('error') %}
+          <div class="alert alert-danger" role="alert">
              {{message}}
           </div>
         {% endfor %}
      
 
+    {% for item in data %}
+   
  
 
      
 
-    <form style="margin-bottom:3em;margin-top:3em" method="post" action="{{path('Add')}}">
+    <form style="margin-bottom:3em;margin-top:3em" method="post" action="{{path('setUpdate_Personnel',{'id':item.id})}}">
         <div class="form-group">
             <label for="exampleInputEmail1">Pseudo <strong style="color:red">*</strong></label>
-             <input type="text" class="form-control" placeholder="Entrer le Pseudo de votre Nouveau personnel" name="username" id="form_username" required>
+             <input type="text" class="form-control" value="{{item.username}}" placeholder="Entrer le Pseudo de votre Nouveau personnel" name="username" id="form_username" required>
             <small id="username" style="color:ligthgrey">tout les champa suivi de l'etoile rouge sont obligatoire.</small>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password<strong style="color:red">*</strong></label>
-              <input type="password" class="form-control" placeholder=" Saisire le Mot de pass" name="Password" id="form_Password" required>
+              <input type="password" class="form-control" placeholder=" Saisire le Mot de pass" value="{{item.password}}" name="Password" id="form_Password" required>
                <small id="password" style="color:ligthgrey"></small>
                    
         </div>
        
         <div class="form-group">
                 <label for="exampleFormControlTextarea1">Comfirmer le Password<strong style="color:red">*</strong></label>
-                   <input type="password" class="form-control" id="ComfirmPassword" name="ComfirmPassword" placeholder="Confirmer le Mot de Pass" required>
+                   <input type="password" class="form-control" id="ComfirmPassword"  value="{{item.password}}" name="ComfirmPassword" placeholder="Confirmer le Mot de Pass" required>
                   <small id="Comfirm" style="color:ligthgrey"></small>
                 
         </div>
 
-            <input type="submit" class="btn btn-primary" style="width:100%" value="Inscrire Un Personnel" id="form_Inscris">
+            <input type="submit" class="btn btn-primary" style="width:100%" value="Modifier" id="modifier">
       </form>  
 
- 
+ {% endfor %}
 
  </div>
       </div>

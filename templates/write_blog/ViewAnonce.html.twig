@@ -34,32 +34,37 @@
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h4 style="color:#37517e;margin-left:2em;padding-top:0.5em">Titre:{{value.title}}</h4> 
                                      <h6 style="font-family:Segoe UI Light;color:grey;margin-left:2em">Categorie:{{value.category}}</h6>
+                                     
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
                                         <div style="width:100%;display:flex;justify-content: space-around;flex-wrap:wrap;">
                                          {% if "mp4" in value.file %}
-                                          <video src="/image/{{value.file}}"  style="width:70%;height:200px;padding-bottom:2em;border-radius:15px" controls></video>
+                                          <video src="/image/{{value.file}}"  style="width:70%;height:200px;padding-bottom:2em;" controls></video>
                                           {% else %}
-                                             <img src="/image/{{value.file}}"  style="width:70%;height:200px;padding-bottom:2em;border-radius:15px" id="listeAnnonce">
+                                             <img src="/image/{{value.file}}"  style="width:70%;height:200px;padding-bottom:2em;" id="listeAnnonce">
                                           {% endif %}
+
+                                            <div class="mt-4 text-center small" style="display:flex;flex-direction: column;justify-content: center;">
+                                              <span class="mr-2">
+                                                <a  href="{{path('Updateblog',{'id':value.id})}}">
+                                                  <i class="fa fa-pencil" aria-hidden="true"  style="color:orange;font-size:25px;"></i>
+                                                </a>
+                                              </span>
+                                              <span class="mr-2">
+                                              <a  href="{{path('Deleteblog',{'id':value.id})}}">
+                                                <i class="fa fa-trash-o" style="color:red;font-size:25px;"></i>
+                                              </a>
+                                              </span>
+                                            
+                                          </div>
                                           
                                         </div>
+
+                                      
                                     </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                           <a  href="{{path('Updateblog',{'id':value.id})}}">
-                                            <i class="fa fa-pencil" aria-hidden="true"  style="color:orange;font-size:20px;"></i>
-                                          </a>
-                                        </span>
-                                        <span class="mr-2">
-                                        <a  href="{{path('Deleteblog',{'id':value.id})}}">
-                                           <i class="fa fa-trash-o" style="color:red;font-size:20px;margin-left:5em"></i>
-                                         </a>
-                                        </span>
-                                       
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

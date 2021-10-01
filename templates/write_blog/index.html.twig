@@ -46,6 +46,26 @@
         {% endfor %}
      
 
+
+         {% for message in app.flashes('erroTitle') %}
+          <div class="alert alert-warning" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
+
+
+        {% for message in app.flashes('erroContent') %}
+          <div class="alert alert-warning" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
+
+
+        {% for message in app.flashes('erroCategory') %}
+          <div class="alert alert-warning" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
  
 
       {{form_start(form,{'attr':{'style':'margin-bottom:3em;margin-top:3em'}})}}
